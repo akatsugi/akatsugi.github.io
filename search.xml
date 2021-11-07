@@ -35,77 +35,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Docker</title>
-    <url>/2021/11/07/Docker/%E5%AD%A6%E4%B9%A0/</url>
-    <content><![CDATA[<h1 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h1><h2 id="Docker-学习过程"><a href="#Docker-学习过程" class="headerlink" title="Docker 学习过程"></a>Docker 学习过程</h2><ul>
-<li>Docker概述</li>
-<li>Docker安装</li>
-<li>Docker命令<ul>
-<li>镜像命令</li>
-<li>容器命令</li>
-<li>操作命令</li>
-</ul>
-</li>
-<li>Docker镜像</li>
-<li>容器数据卷</li>
-<li>DockerFile</li>
-<li>Docker网络原理</li>
-<li>IDEA整合Docker</li>
-</ul>
-<p>以上完成“单机Docker”</p>
-<ul>
-<li>Docker Compose 集群</li>
-<li>Docker Swarm 集群管理</li>
-<li>CI \CD Jenkins 持续集成和持续部署</li>
-</ul>
-<h2 id="Docker概述"><a href="#Docker概述" class="headerlink" title="Docker概述"></a>Docker概述</h2><h3 id="Docker-为什么会出现"><a href="#Docker-为什么会出现" class="headerlink" title="Docker 为什么会出现"></a>Docker 为什么会出现</h3><p>开发与上线</p>
-<p>开发与运维</p>
-<p>版本更新 –&gt;服务不可用</p>
-<p>==&gt;解决环境配置很麻烦的问题</p>
-<p>–&gt;发布项目：jar包+环境一起打包</p>
-<p>传统由开发完成jar，运维配置环境</p>
-<p>现在由开发打包部署上线，直接完成环境配置 –镜像</p>
-<p>仓库地址 <a href="https://hub.docker.com/]">https://hub.docker.com/</a></p>
-<p>文档地址：<a href="https://docs.docker.com/">https://docs.docker.com/</a></p>
-<h3 id="Docker应用场景"><a href="#Docker应用场景" class="headerlink" title="Docker应用场景"></a>Docker应用场景</h3><p><strong>容器化技术</strong></p>
-<p>打包镜像发布测试，一键运行</p>
-<p>更便捷的升级和扩缩容</p>
-<p>更简单的系统运维：使开发测试环境高度一致</p>
-<p>更高效的计算资源利用：Docker是内核级别的虚拟化，可以在一个物理机上运行更多的容器实例</p>
-<h2 id="Docker安装"><a href="#Docker安装" class="headerlink" title="Docker安装"></a>Docker安装</h2><h3 id="Docker的基本组成"><a href="#Docker的基本组成" class="headerlink" title="Docker的基本组成"></a>Docker的基本组成</h3><p><img src="https://files.catbox.moe/v7tixw.png" alt="架构图"></p>
-<p>名词解释：</p>
-<p><img src="https://files.catbox.moe/k3gvyz.png"></p>
-<h3 id="安装Docker"><a href="#安装Docker" class="headerlink" title="安装Docker"></a>安装Docker</h3>]]></content>
-      <tags>
-        <tag>Docker</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>自定义注解</title>
-    <url>/2021/11/07/%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B3%A8%E8%A7%A3/</url>
-    <content><![CDATA[<h2 id="注解类"><a href="#注解类" class="headerlink" title="注解类"></a>注解类</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Target(ElementType.METHOD)</span> <span class="comment">//作用于方法</span></span><br><span class="line"><span class="meta">@Retention(RetentionPolicy.RUNTIME)</span> <span class="comment">// 运行时有效</span></span><br><span class="line"><span class="meta">@Documented</span> <span class="comment">//被 javadoc工具记录</span></span><br><span class="line"><span class="meta">@Inherited</span> <span class="comment">//可继承</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> BatchQuery &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="自定义注解"><a href="#自定义注解" class="headerlink" title="自定义注解"></a>自定义注解</h2><p><code>@interface</code></p>
-<p>在底层实现上，所有定义的注解都会自动继承java.lang.annotation.Annotation接口</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Aspect</span> <span class="comment">//标注增强处理类（切面类）</span></span><br><span class="line"><span class="meta">@Component</span> <span class="comment">//交由Spring容器管理</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> CherryAnnotation &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="pointcut注解"><a href="#pointcut注解" class="headerlink" title="@pointcut注解"></a><code>@pointcut</code>注解</h2><p>Pointcut(切入点)： JoinPoint的集合，是程序中需要注入Advice的位置的集合，指明Advice要在什么样的条件下才能被触发，在程序中主要体现为书写切入点表达式。</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Pointcut(&quot;@annotation(com.ztesoft.zsmart.pot.annotation.BatchQuery)&quot;)</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="Around注解"><a href="#Around注解" class="headerlink" title="@Around注解"></a><code>@Around</code>注解</h2><p>@Around注解：可以用来在调用一个具体方法前和调用后来完成一些具体的任务。</p>
-<p>=<code>@Before</code>+<code>@After</code></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Around(&quot;pointcut()&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">around</span><span class="params">(ProceedingJoinPoint joinPoint)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">        ....</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<p>也可以不使用<code>@pointcut</code></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//调用controller包下的任意类的任意方法时均会调用此方法</span></span><br><span class="line"><span class="meta">@Around(&quot;execution(* com.company.controller.*.*(..))&quot;)</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> Object <span class="title">run1</span><span class="params">(ProceedingJoinPoint joinPoint)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">  <span class="comment">//获取方法参数值数组</span></span><br><span class="line">  Object[] args = joinPoint.getArgs();</span><br><span class="line">  <span class="comment">//得到其方法签名</span></span><br><span class="line">  MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();</span><br><span class="line">  <span class="comment">//获取方法参数类型数组</span></span><br><span class="line">  Class[] paramTypeArray = methodSignature.getParameterTypes();</span><br><span class="line">  .......</span><br><span class="line">  logger.info(<span class="string">&quot;请求参数为&#123;&#125;&quot;</span>,args);</span><br><span class="line">  <span class="comment">//动态修改其参数</span></span><br><span class="line">  <span class="comment">//注意，如果调用joinPoint.proceed()方法，则修改的参数值不会生效，必须调用joinPoint.proceed(Object[] args)</span></span><br><span class="line">  Object result = joinPoint.proceed(args);</span><br><span class="line">  logger.info(<span class="string">&quot;响应结果为&#123;&#125;&quot;</span>,result);</span><br><span class="line">   <span class="comment">//如果这里不返回result，则目标对象实际返回值会被置为null</span></span><br><span class="line">  <span class="keyword">return</span> result;   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>如果我们还想利用其进行参数的修改，则调用时必须用joinPoint.proceed(Object[] args)方法，将修改后的参数进行回传。如果用joinPoint.proceed()方法，则修改后的参数并不会真正被使用。</strong></p>
-]]></content>
-      <tags>
-        <tag>其他</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Spring Security</title>
     <url>/2021/11/07/SpringSecurity/SpringSecurity/</url>
     <content><![CDATA[<h1 id="SpringSecurity"><a href="#SpringSecurity" class="headerlink" title="SpringSecurity"></a>SpringSecurity</h1><p><a href="/https://blog.csdn.net/qq_40298902/article/details/106433192">CSDN实例</a></p>
@@ -287,6 +216,77 @@
 ]]></content>
       <tags>
         <tag>Spring</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>自定义注解</title>
+    <url>/2021/11/07/%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B3%A8%E8%A7%A3/</url>
+    <content><![CDATA[<h2 id="注解类"><a href="#注解类" class="headerlink" title="注解类"></a>注解类</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Target(ElementType.METHOD)</span> <span class="comment">//作用于方法</span></span><br><span class="line"><span class="meta">@Retention(RetentionPolicy.RUNTIME)</span> <span class="comment">// 运行时有效</span></span><br><span class="line"><span class="meta">@Documented</span> <span class="comment">//被 javadoc工具记录</span></span><br><span class="line"><span class="meta">@Inherited</span> <span class="comment">//可继承</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> BatchQuery &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="自定义注解"><a href="#自定义注解" class="headerlink" title="自定义注解"></a>自定义注解</h2><p><code>@interface</code></p>
+<p>在底层实现上，所有定义的注解都会自动继承java.lang.annotation.Annotation接口</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Aspect</span> <span class="comment">//标注增强处理类（切面类）</span></span><br><span class="line"><span class="meta">@Component</span> <span class="comment">//交由Spring容器管理</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> CherryAnnotation &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="pointcut注解"><a href="#pointcut注解" class="headerlink" title="@pointcut注解"></a><code>@pointcut</code>注解</h2><p>Pointcut(切入点)： JoinPoint的集合，是程序中需要注入Advice的位置的集合，指明Advice要在什么样的条件下才能被触发，在程序中主要体现为书写切入点表达式。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Pointcut(&quot;@annotation(com.ztesoft.zsmart.pot.annotation.BatchQuery)&quot;)</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Around注解"><a href="#Around注解" class="headerlink" title="@Around注解"></a><code>@Around</code>注解</h2><p>@Around注解：可以用来在调用一个具体方法前和调用后来完成一些具体的任务。</p>
+<p>=<code>@Before</code>+<code>@After</code></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Around(&quot;pointcut()&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">around</span><span class="params">(ProceedingJoinPoint joinPoint)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">        ....</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>也可以不使用<code>@pointcut</code></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//调用controller包下的任意类的任意方法时均会调用此方法</span></span><br><span class="line"><span class="meta">@Around(&quot;execution(* com.company.controller.*.*(..))&quot;)</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> Object <span class="title">run1</span><span class="params">(ProceedingJoinPoint joinPoint)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">  <span class="comment">//获取方法参数值数组</span></span><br><span class="line">  Object[] args = joinPoint.getArgs();</span><br><span class="line">  <span class="comment">//得到其方法签名</span></span><br><span class="line">  MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();</span><br><span class="line">  <span class="comment">//获取方法参数类型数组</span></span><br><span class="line">  Class[] paramTypeArray = methodSignature.getParameterTypes();</span><br><span class="line">  .......</span><br><span class="line">  logger.info(<span class="string">&quot;请求参数为&#123;&#125;&quot;</span>,args);</span><br><span class="line">  <span class="comment">//动态修改其参数</span></span><br><span class="line">  <span class="comment">//注意，如果调用joinPoint.proceed()方法，则修改的参数值不会生效，必须调用joinPoint.proceed(Object[] args)</span></span><br><span class="line">  Object result = joinPoint.proceed(args);</span><br><span class="line">  logger.info(<span class="string">&quot;响应结果为&#123;&#125;&quot;</span>,result);</span><br><span class="line">   <span class="comment">//如果这里不返回result，则目标对象实际返回值会被置为null</span></span><br><span class="line">  <span class="keyword">return</span> result;   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>如果我们还想利用其进行参数的修改，则调用时必须用joinPoint.proceed(Object[] args)方法，将修改后的参数进行回传。如果用joinPoint.proceed()方法，则修改后的参数并不会真正被使用。</strong></p>
+]]></content>
+      <tags>
+        <tag>其他</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Docker</title>
+    <url>/2021/11/07/Docker/%E5%AD%A6%E4%B9%A0/</url>
+    <content><![CDATA[<h1 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h1><h2 id="Docker-学习过程"><a href="#Docker-学习过程" class="headerlink" title="Docker 学习过程"></a>Docker 学习过程</h2><ul>
+<li>Docker概述</li>
+<li>Docker安装</li>
+<li>Docker命令<ul>
+<li>镜像命令</li>
+<li>容器命令</li>
+<li>操作命令</li>
+</ul>
+</li>
+<li>Docker镜像</li>
+<li>容器数据卷</li>
+<li>DockerFile</li>
+<li>Docker网络原理</li>
+<li>IDEA整合Docker</li>
+</ul>
+<p>以上完成“单机Docker”</p>
+<ul>
+<li>Docker Compose 集群</li>
+<li>Docker Swarm 集群管理</li>
+<li>CI \CD Jenkins 持续集成和持续部署</li>
+</ul>
+<h2 id="Docker概述"><a href="#Docker概述" class="headerlink" title="Docker概述"></a>Docker概述</h2><h3 id="Docker-为什么会出现"><a href="#Docker-为什么会出现" class="headerlink" title="Docker 为什么会出现"></a>Docker 为什么会出现</h3><p>开发与上线</p>
+<p>开发与运维</p>
+<p>版本更新 –&gt;服务不可用</p>
+<p>==&gt;解决环境配置很麻烦的问题</p>
+<p>–&gt;发布项目：jar包+环境一起打包</p>
+<p>传统由开发完成jar，运维配置环境</p>
+<p>现在由开发打包部署上线，直接完成环境配置 –镜像</p>
+<p>仓库地址 <a href="https://hub.docker.com/]">https://hub.docker.com/</a></p>
+<p>文档地址：<a href="https://docs.docker.com/">https://docs.docker.com/</a></p>
+<h3 id="Docker应用场景"><a href="#Docker应用场景" class="headerlink" title="Docker应用场景"></a>Docker应用场景</h3><p><strong>容器化技术</strong></p>
+<p>打包镜像发布测试，一键运行</p>
+<p>更便捷的升级和扩缩容</p>
+<p>更简单的系统运维：使开发测试环境高度一致</p>
+<p>更高效的计算资源利用：Docker是内核级别的虚拟化，可以在一个物理机上运行更多的容器实例</p>
+<h2 id="Docker安装"><a href="#Docker安装" class="headerlink" title="Docker安装"></a>Docker安装</h2><h3 id="Docker的基本组成"><a href="#Docker的基本组成" class="headerlink" title="Docker的基本组成"></a>Docker的基本组成</h3><p><img src="https://files.catbox.moe/v7tixw.png" alt="架构图"></p>
+<p>名词解释：</p>
+<p><img src="https://files.catbox.moe/k3gvyz.png"></p>
+<h3 id="安装Docker"><a href="#安装Docker" class="headerlink" title="安装Docker"></a>安装Docker</h3>]]></content>
+      <tags>
+        <tag>Docker</tag>
       </tags>
   </entry>
   <entry>
