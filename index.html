@@ -157,6 +157,21 @@
     <article id="post-SpringSecurity/SpringSecurity" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/11/07/SpringSecurity/SpringSecurity/">Spring Security</a>
+    </h1>
+  
+
+        
+        <a href="/2021/11/07/SpringSecurity/SpringSecurity/" class="archive-article-date">
+  	<time datetime="2021-11-07T12:12:51.033Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-07</time>
+</a>
+        
+      </header>
+    
     <div class="article-entry" itemprop="articleBody">
       
         <h1 id="SpringSecurity"><a href="#SpringSecurity" class="headerlink" title="SpringSecurity"></a>SpringSecurity</h1><p><a href="/https://blog.csdn.net/qq_40298902/article/details/106433192">CSDN实例</a></p>
@@ -182,7 +197,7 @@
 </ol>
 </li>
 </ol>
-<p><img src="image/SpringSecurity/1626418008039.png" alt="Filter"></p>
+<p><img src="https://files.catbox.moe/lay6v0.png" alt="Filter"></p>
 <h2 id="UserDetailsService接口"><a href="#UserDetailsService接口" class="headerlink" title="UserDetailsService接口"></a>UserDetailsService接口</h2><p>自定义账号密码逻辑，数据库？内存？ （redis?</p>
 <p>查询数据库用户名和密码的过程</p>
 <ul>
@@ -210,17 +225,17 @@
 <ol>
 <li>@Configuration</li>
 <li>extends WebSecurityConfigurerAdapter</li>
-<li><img src="image/SpringSecurity/1626419507035.png"></li>
+<li><img src="https://files.catbox.moe/6zo8c1.png"></li>
 </ol>
 </li>
 <li><p>自定义实现类UserDetailsService</p>
 <ol>
 <li>创建配置类，设置使用哪个userDetailsService实现类<ol>
-<li><img src="image/SpringSecurity/1626419793958.png"></li>
+<li><img src="https://files.catbox.moe/ej0nnn.png"></li>
 </ol>
 </li>
 <li>编写实现类，返回User对象，User对象有用户名密码和操作<ol>
-<li><img src="image/SpringSecurity/1626420008482.png"></li>
+<li><img src="https://files.catbox.moe/rrcq8k.png"></li>
 </ol>
 </li>
 </ol>
@@ -235,41 +250,41 @@
 <li>在UserDetailsService的自定义实现类中调用mapper中的方法查询数据库对用户的认证信息（根据username查询）</li>
 <li>在启动类中添加@MapperScan(“Mapper所在包”)注释</li>
 <li>配置文件中配置数据库信息<ol>
-<li><img src="image/SpringSecurity/1626420906892.png"></li>
+<li><img src="https://files.catbox.moe/whr6u5.png"></li>
 <li>springBoot2默认使用Mysql8;driver-class-name加cj;设置时区</li>
 </ol>
 </li>
 </ol>
 <h2 id="配置类configure设置"><a href="#配置类configure设置" class="headerlink" title="配置类configure设置"></a>配置类configure设置</h2><p>自定义登录页面、403页面等</p>
-<p><img src="image/SpringSecurity/1626421489320.png" alt="config"></p>
-<p><img src="image/SpringSecurity/1626424052210.png" alt="403"></p>
+<p><img src="https://files.catbox.moe/j63v8t.png" alt="config"></p>
+<p><img src="https://files.catbox.moe/cjkuom.png" alt="403"></p>
 <h2 id="基于角色和权限实现访问控制"><a href="#基于角色和权限实现访问控制" class="headerlink" title="基于角色和权限实现访问控制"></a>基于角色和权限实现访问控制</h2><h3 id="1-hasAuthority"><a href="#1-hasAuthority" class="headerlink" title="1. hasAuthority"></a>1. hasAuthority</h3><p>如果当前主体具有指定的权限，有则返回true，否则false</p>
-<p><img src="image/SpringSecurity/1626421975358.png" alt="hasAuthority"></p>
-<h3 id="2-hasAnyAuthority"><a href="#2-hasAnyAuthority" class="headerlink" title="2. hasAnyAuthority"></a>2. hasAnyAuthority</h3><p><img src="image/SpringSecurity/1626423640275.png"></p>
+<p><img src="https://files.catbox.moe/jeqjyj.png" alt="hasAuthority"></p>
+<h3 id="2-hasAnyAuthority"><a href="#2-hasAnyAuthority" class="headerlink" title="2. hasAnyAuthority"></a>2. hasAnyAuthority</h3><p><img src="https://files.catbox.moe/bzvoxj.png"></p>
 <h3 id="3-hasRole"><a href="#3-hasRole" class="headerlink" title="3. hasRole"></a>3. hasRole</h3><p>底层代码中将role改为了ROLE_#{role}</p>
-<p><img src="image/SpringSecurity/1626423828215.png"></p>
+<p><img src="https://files.catbox.moe/zoontv.png"></p>
 <h3 id="4-hasAnyRole"><a href="#4-hasAnyRole" class="headerlink" title="4. hasAnyRole"></a>4. hasAnyRole</h3><p>同上</p>
 <h2 id="注解使用"><a href="#注解使用" class="headerlink" title="注解使用"></a>注解使用</h2><h3 id="Secured"><a href="#Secured" class="headerlink" title="@Secured"></a>@Secured</h3><p>判断用户是否具有角色（其中匹配的字符串需要加上前缀”ROLE_”)</p>
 <p>开启注解功能<code>@EnableGlobalMethodSecurity(securedEnable=true)</code></p>
 <p>在控制器方法上放添加<code>@Secured(&#123;&quot;ROLE_normal&quot;,&quot;ROLE_admin&quot;&#125;)</code></p>
-<p><img src="image/SpringSecurity/1626424910551.png"></p>
+<p><img src="https://files.catbox.moe/0av96c.png"></p>
 <h3 id="PreAuthorize"><a href="#PreAuthorize" class="headerlink" title="@PreAuthorize"></a>@PreAuthorize</h3><p>在进入方法前进行权限验证</p>
 <p><code>@PreAuthorize(&quot;hasAnyAuthority(&#39;admins&#39;)&quot;)</code>四个方法都可以填在( )里面</p>
 <p>开启注解功能<code>@EnableGlobalMethodSecurity(prePostEnabled=true)</code></p>
-<p><img src="image/SpringSecurity/1626425175755.png"></p>
+<p><img src="https://files.catbox.moe/do2cpo.png"></p>
 <h3 id="PostAuthorize"><a href="#PostAuthorize" class="headerlink" title="@PostAuthorize"></a>@PostAuthorize</h3><p>方法执行之后进行权限验证，多用于返回值</p>
 <p>开启注解功能<code>@EnableGlobalMethodSecurity(prePostEnabled=true)</code></p>
 <p><code>@PostAuthorize(&quot;hasAnyAuthority(&#39;admins&#39;)&quot;)</code>四个方法都可以填在( )里面</p>
-<p><img src="image/SpringSecurity/1626425321331.png"></p>
+<p><img src="https://files.catbox.moe/zh6p22.png"></p>
 <p>test:</p>
-<p><img src="image/SpringSecurity/1626425348343.png"></p>
+<p><img src="https://files.catbox.moe/mntx2c.png"></p>
 <p>↑有输出但跳转到403页面</p>
 <h3 id="PostFilter"><a href="#PostFilter" class="headerlink" title="@PostFilter"></a>@PostFilter</h3><p>不常用</p>
 <p>对返回数据进行过滤</p>
-<p><img src="image/SpringSecurity/1626425509346.png"></p>
+<p><img src="https://files.catbox.moe/f4cqge.png"></p>
 <h3 id="PreFilter"><a href="#PreFilter" class="headerlink" title="@PreFilter"></a>@PreFilter</h3><p>不常用</p>
 <p>对传入方法的数据进行过滤</p>
-<p><img src="image/SpringSecurity/1626425533172.png"></p>
+<p><img src="https://files.catbox.moe/urcoyc.png"></p>
 <h2 id="用户注销"><a href="#用户注销" class="headerlink" title="用户注销"></a>用户注销</h2><p>配置类中添加退出配置</p>
 <p><code>http.logout().logoutUrl(&quot;/logout&quot;).logoutSuccessUrl(&quot;/index&quot;).permitAll()</code></p>
 <p>退出超链接：</p>
@@ -279,7 +294,7 @@
 <li>cookie技术</li>
 <li>安全框架实现</li>
 </ul>
-<h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p><img src="image/SpringSecurity/1626662722284.png" alt="步骤"></p>
+<h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p><img src="https://files.catbox.moe/ddagu1.png" alt="步骤"></p>
 <h3 id="具体实现"><a href="#具体实现" class="headerlink" title="具体实现"></a>具体实现</h3><ol>
 <li>创建数据库 <code>JdbcTokenRepositoryImpl</code>中有建表sql语句</li>
 <li>修改配置类：注入数据源，配置操作数据库对象</li>
@@ -287,7 +302,7 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Autowired</span></span><br><span class="line"><span class="keyword">private</span> DataSource dataSource;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Bean</span> <span class="function"><span class="keyword">public</span> PersistenTokenRepository <span class="title">persistenTokenRepository</span><span class="params">()</span></span>&#123;</span><br><span class="line">    JdbcTokenRepositoryImpl jdbcTokenRepository=<span class="keyword">new</span> JdbcTokenRepositoryImpl(); </span><br><span class="line">    jdbcTokenRepository.setDataSource(dataSource);</span><br><span class="line">   <span class="comment">// jdbcTokenRepository.setCreateTableOnStartup(true) 自动创建数据库表</span></span><br><span class="line">    <span class="keyword">return</span> jdbcTokenRepository;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>3.</p>
-<p><img src="image/SpringSecurity/1626663365871.png" alt="第三步"></p>
+<p><img src="https://files.catbox.moe/z5yw7u.png" alt="第三步"></p>
 <ol start="4">
 <li>自动登录复选框</li>
 </ol>
@@ -297,18 +312,18 @@
 <p>form中加入以下语句</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;hidden&quot;</span> <span class="attr">th:name</span>=<span class="string">&quot;$&#123;_csrf.parameterName&#125;$&quot;</span> <span class="attr">th:value</span>=<span class="string">&quot;$&#123;_csrf.token&#125;$&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
 
-<p><img src="image/SpringSecurity/1626664156340.png"></p>
+<p><img src="https://files.catbox.moe/khqx95.png"></p>
 <p><strong>csrfFilter.class</strong></p>
 <h2 id="微服务"><a href="#微服务" class="headerlink" title="微服务"></a>微服务</h2><ul>
 <li>微服务的每个模块都相当于一个单独的项目，代码量明显减少，遇到的问题也相对来说比较好解决</li>
 <li>微服务的每个模块可以使用不同的存储方式(redis/mysql/etc）数据库也是每个模块对应自己的数据库</li>
 <li>每个模块可以使用不同的开发技术、开发语言，开发模式更灵活</li>
 </ul>
-<p><img src="image/SpringSecurity/1626664991267.png"></p>
+<p><img src="https://files.catbox.moe/4nbgiq.png"></p>
 <h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><blockquote>
-<p><img src="%E7%AC%94%E8%AE%B0%5C%E6%88%AA%E5%9B%BE%5C13-%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9D%83%E9%99%90%E6%96%B9%E6%A1%88-%E5%AE%9E%E7%8E%B0%E8%BF%87%E7%A8%8B%E5%88%86%E6%9E%90.png"><br><img src="%E7%AC%94%E8%AE%B0%5C%E6%88%AA%E5%9B%BE%5C14-%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9D%83%E9%99%90%E6%96%B9%E6%A1%88-%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B.png"><br><img src="%E7%AC%94%E8%AE%B0%5C%E6%88%AA%E5%9B%BE%5C15-%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9D%83%E9%99%90%E6%96%B9%E6%A1%88-%E6%A1%88%E4%BE%8B%E6%8A%80%E6%9C%AF%E4%BB%8B%E7%BB%8D.png"><br><img src="%E7%AC%94%E8%AE%B0%5C%E6%88%AA%E5%9B%BE%5C16-%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9D%83%E9%99%90%E6%96%B9%E6%A1%88-%E6%90%AD%E5%BB%BA%E9%A1%B9%E7%9B%AE%E5%B7%A5%E7%A8%8B.png"><br><img src="%E7%AC%94%E8%AE%B0%5C%E6%88%AA%E5%9B%BE%5C17-%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9D%83%E9%99%90%E6%96%B9%E6%A1%88-%E7%BC%96%E5%86%99%E4%BB%A3%E7%A0%81%EF%BC%88%E6%9D%83%E9%99%90%E5%B7%A5%E5%85%B7%E7%B1%BB%EF%BC%89.png"><br><img src="%E7%AC%94%E8%AE%B0%5C%E6%88%AA%E5%9B%BE%5C18-%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9D%83%E9%99%90%E6%96%B9%E6%A1%88-%E5%90%AF%E5%8A%A8redis%E5%92%8Cnacos.png"><br><img src="%E7%AC%94%E8%AE%B0%5C%E6%88%AA%E5%9B%BE%5C19-%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9D%83%E9%99%90%E6%96%B9%E6%A1%88-%E7%BC%96%E5%86%99%E4%BB%A3%E7%A0%81%EF%BC%88%E8%AE%A4%E8%AF%81%E5%92%8C%E6%8E%88%E6%9D%83%E8%BF%87%E6%BB%A4%E5%99%A8%EF%BC%89.png"><br><img src="%E7%AC%94%E8%AE%B0%5C%E6%88%AA%E5%9B%BE%5C20-%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9D%83%E9%99%90%E6%96%B9%E6%A1%88-%E7%BC%96%E5%86%99%E4%BB%A3%E7%A0%81%EF%BC%88%E6%A0%B8%E5%BF%83%E9%85%8D%E7%BD%AE%E7%B1%BB%EF%BC%89.png"><br><img src="%E7%AC%94%E8%AE%B0%5C%E6%88%AA%E5%9B%BE%5C21-%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9D%83%E9%99%90%E6%96%B9%E6%A1%88-%E7%BC%96%E5%86%99%E4%BB%A3%E7%A0%81%EF%BC%88UserDetailsService%EF%BC%89.png"><br><img src="%E7%AC%94%E8%AE%B0%5C%E6%88%AA%E5%9B%BE%5C22-%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9D%83%E9%99%90%E6%96%B9%E6%A1%88-%E6%9D%83%E9%99%90%E6%A8%A1%E5%9D%97%EF%BC%88%E4%BB%A3%E7%A0%81%E8%AF%B4%E6%98%8E%EF%BC%89.png"></p>
+<p><img src="https://files.catbox.moe/83ktop.png"><br><img src="https://files.catbox.moe/v5k1fs.png"><br><img src="https://files.catbox.moe/bnkrpw.png"><br><img src="https://files.catbox.moe/may13u.png"><br><img src="https://files.catbox.moe/2jaj6f.png"><br><img src="https://files.catbox.moe/wm0w0b.png"><br><img src="https://files.catbox.moe/syca4w.png"><br><img src="https://files.catbox.moe/b3wcly.png"><br><img src="https://files.catbox.moe/k0l3rs.png"><br><img src="https://files.catbox.moe/kyvfra.png"></p>
 </blockquote>
-<h2 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h2><p><img src="image/SpringSecurity/1626684123193.png"></p>
+<h2 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h2><p><img src="https://files.catbox.moe/3c4wus.png"></p>
 <h3 id="UsernamePasswordAuthenticationFilter"><a href="#UsernamePasswordAuthenticationFilter" class="headerlink" title="UsernamePasswordAuthenticationFilter"></a><code>UsernamePasswordAuthenticationFilter</code></h3><ul>
 <li><p>查询Filter父类<code>AbstractAuthenticationProcessingFilter</code>的<code>doFilter()</code></p>
 <ul>
@@ -332,7 +347,7 @@
 </ul>
 </li>
 <li><p><code>UsernamePasswordAuthencationToken</code>构建过程</p>
-<p><img src="image/SpringSecurity/1626685041006.png"></p>
+<p><img src="https://files.catbox.moe/klxjx8.png"></p>
 </li>
 </ul>
 
@@ -343,6 +358,17 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Spring</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -379,6 +405,21 @@
   
     <article id="post-Redis/redis" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/11/07/Redis/redis/">Redis</a>
+    </h1>
+  
+
+        
+        <a href="/2021/11/07/Redis/redis/" class="archive-article-date">
+  	<time datetime="2021-11-07T11:20:27.189Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-07</time>
+</a>
+        
+      </header>
     
     <div class="article-entry" itemprop="articleBody">
       
@@ -512,6 +553,17 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Redis</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -548,6 +600,21 @@
   
     <article id="post-Dubbo/dubbo" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/11/07/Dubbo/dubbo/">Dubbo</a>
+    </h1>
+  
+
+        
+        <a href="/2021/11/07/Dubbo/dubbo/" class="archive-article-date">
+  	<time datetime="2021-11-07T11:19:54.236Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-07</time>
+</a>
+        
+      </header>
     
     <div class="article-entry" itemprop="articleBody">
       
@@ -684,6 +751,17 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">dubbo</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -720,6 +798,21 @@
   
     <article id="post-Docker/学习" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/11/07/Docker/%E5%AD%A6%E4%B9%A0/">Docker</a>
+    </h1>
+  
+
+        
+        <a href="/2021/11/07/Docker/%E5%AD%A6%E4%B9%A0/" class="archive-article-date">
+  	<time datetime="2021-11-07T11:19:53.955Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-07</time>
+</a>
+        
+      </header>
     
     <div class="article-entry" itemprop="articleBody">
       
@@ -769,6 +862,17 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">Docker</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -806,6 +910,21 @@
     <article id="post-自定义注解" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/11/07/%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B3%A8%E8%A7%A3/">自定义注解</a>
+    </h1>
+  
+
+        
+        <a href="/2021/11/07/%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B3%A8%E8%A7%A3/" class="archive-article-date">
+  	<time datetime="2021-11-07T11:19:53.909Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-11-07</time>
+</a>
+        
+      </header>
+    
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="注解类"><a href="#注解类" class="headerlink" title="注解类"></a>注解类</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Target(ElementType.METHOD)</span> <span class="comment">//作用于方法</span></span><br><span class="line"><span class="meta">@Retention(RetentionPolicy.RUNTIME)</span> <span class="comment">// 运行时有效</span></span><br><span class="line"><span class="meta">@Documented</span> <span class="comment">//被 javadoc工具记录</span></span><br><span class="line"><span class="meta">@Inherited</span> <span class="comment">//可继承</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> BatchQuery &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -833,6 +952,17 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">其他</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -887,20 +1017,14 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="安装Nodejs"><a href="#安装Nodejs" class="headerlink" title="安装Nodejs"></a>安装Nodejs</h1><p>node -v    #查看node版本<br>npm -v    #查看npm版本<br>npm install -g cnpm –registry=<a target="_blank" rel="noopener" href="http://registry.npm.taobao.org/">http://registry.npm.taobao.org</a>    #安装淘宝的cnpm 管理器<br>cnpm -v    #查看cnpm版本<br>cnpm install -g hexo-cli    #安装hexo框架<br>hexo -v    #查看hexo版本<br>mkdir blog    #创建blog目录<br>cd blog     #进入blog目录<br>sudo hexo init     #生成博客 初始化博客<br>hexo s    #启动本地博客服务<br><a target="_blank" rel="noopener" href="http://localhost:4000/">http://localhost:4000/</a>    #本地访问地址<br>hexo n 我的第一篇文章 #创建新的文章 </p>
+        <h1 id="安装Nodejs"><a href="#安装Nodejs" class="headerlink" title="安装Nodejs"></a>安装Nodejs</h1><p>node -v    #查看node版本<br>npm -v    #查看npm版本<br>npm install -g cnpm –registry=<a target="_blank" rel="noopener" href="http://registry.npm.taobao.org/">http://registry.npm.taobao.org</a>    #安装淘宝的cnpm 管理器<br>cnpm -v    #查看cnpm版本<br>cnpm install -g hexo-cli    #安装hexo框架<br>hexo -v    #查看hexo版本<br>mkdir blog    #创建blog目录<br>cd blog     #进入blog目录<br>sudo hexo init     #生成博客 初始化博客<br>hexo s    #启动本地博客服务<br><a target="_blank" rel="noopener" href="http://localhost:4000/">http://localhost:4000/</a>    #本地访问地址<br>hexo n 我的第一篇文章 #创建新的文章</p>
 <h1 id="返回blog目录"><a href="#返回blog目录" class="headerlink" title="返回blog目录"></a>返回blog目录</h1><p>hexo clean #清理<br>hexo g #生成</p>
 <h1 id="Github创建一个新的仓库-YourGithubName-github-io"><a href="#Github创建一个新的仓库-YourGithubName-github-io" class="headerlink" title="Github创建一个新的仓库 YourGithubName.github.io"></a>Github创建一个新的仓库 YourGithubName.github.io</h1><h2 id="cnpm-install-–save-hexo-deployer-git-在blog目录下安装git部署插件"><a href="#cnpm-install-–save-hexo-deployer-git-在blog目录下安装git部署插件" class="headerlink" title="cnpm install –save hexo-deployer-git #在blog目录下安装git部署插件"></a>cnpm install –save hexo-deployer-git #在blog目录下安装git部署插件</h2><h1 id="配置-config-yml"><a href="#配置-config-yml" class="headerlink" title="配置_config.yml"></a>配置_config.yml</h1><hr>
-<pre><code># Deployment
-## Docs: https://hexo.io/docs/deployment.html
-deploy:
-      type: git
-     repo: https://github.com/YourGithubName/YourGithubName.github.io.git
-      branch: master
-</code></pre>
+<h1 id="Deployment"><a href="#Deployment" class="headerlink" title="Deployment"></a>Deployment</h1><h2 id="Docs-https-hexo-io-docs-deployment-html"><a href="#Docs-https-hexo-io-docs-deployment-html" class="headerlink" title="Docs: https://hexo.io/docs/deployment.html"></a>Docs: <a target="_blank" rel="noopener" href="https://hexo.io/docs/deployment.html">https://hexo.io/docs/deployment.html</a></h2><p>deploy:<br>    type: git<br>    repo: <a target="_blank" rel="noopener" href="https://github.com/YourGithubName/YourGithubName.github.io.git">https://github.com/YourGithubName/YourGithubName.github.io.git</a><br>    branch: master</p>
 <hr>
 <p>hexo d    #部署到Github仓库里<br><a target="_blank" rel="noopener" href="https://yourgithubname.github.io/">https://YourGithubName.github.io/</a>  #访问这个地址可以查看博客</p>
-<p> git clone <a target="_blank" rel="noopener" href="https://github.com/litten/hexo-theme-yilia.git">https://github.com/litten/hexo-theme-yilia.git</a> themes/yilia  #下载yilia主题到本地</p>
-<h1 id="修改hexo根目录下的-config-yml-文件-：-theme-yilia"><a href="#修改hexo根目录下的-config-yml-文件-：-theme-yilia" class="headerlink" title="修改hexo根目录下的 _config.yml 文件 ： theme: yilia"></a>修改hexo根目录下的 _config.yml 文件 ： theme: yilia</h1><p>hexo c    #清理一下<br>hexo g    #生成<br>hexo d    #部署到远程Github仓库<br><a target="_blank" rel="noopener" href="https://yourgithubname.github.io/">https://YourGithubName.github.io/</a>  </p>
+<p>git clone <a target="_blank" rel="noopener" href="https://github.com/litten/hexo-theme-yilia.git">https://github.com/litten/hexo-theme-yilia.git</a> themes/yilia  #下载yilia主题到本地</p>
+<h1 id="修改hexo根目录下的-config-yml-文件-：-theme-yilia"><a href="#修改hexo根目录下的-config-yml-文件-：-theme-yilia" class="headerlink" title="修改hexo根目录下的 _config.yml 文件 ： theme: yilia"></a>修改hexo根目录下的 _config.yml 文件 ： theme: yilia</h1><p>hexo c    #清理一下<br>hexo g    #生成<br>hexo d    #部署到远程Github仓库<br><a target="_blank" rel="noopener" href="https://yourgithubname.github.io/">https://YourGithubName.github.io/</a></p>
 <h1 id="查看博客"><a href="#查看博客" class="headerlink" title="查看博客"></a>查看博客</h1>
       
 
@@ -909,6 +1033,17 @@ deploy:
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">实践</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -1105,6 +1240,30 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
             <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
           </label>
           <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">实践</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Docker</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">其他</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Redis</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">dubbo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color2">Spring</a>
+              </li>
             
             <div class="clearfix"></div>
           </ul>
