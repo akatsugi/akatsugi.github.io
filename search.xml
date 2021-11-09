@@ -210,137 +210,6 @@ https://download.docker.com/linux/centos/docker-ce.repo
       </tags>
   </entry>
   <entry>
-    <title>Redis</title>
-    <url>/2021/11/07/Redis/redis/</url>
-    <content><![CDATA[<h1 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h1><h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><h3 id="STRING"><a href="#STRING" class="headerlink" title="STRING"></a>STRING</h3><p>二进制安全，可以包含任何数据</p>
-<p>大小上下512M</p>
-<h3 id="LIST"><a href="#LIST" class="headerlink" title="LIST"></a>LIST</h3><span id="more"></span>
-<p>字符串列表</p>
-<p>按照插入顺序排序</p>
-<p>头部LEFT 尾部RIGHT</p>
-<h3 id="HASH"><a href="#HASH" class="headerlink" title="HASH"></a>HASH</h3><p>类似Java.Map</p>
-<p>键值对集合</p>
-<p>用于存储对象</p>
-<h3 id="SET"><a href="#SET" class="headerlink" title="SET"></a>SET</h3><p>STRING 类型的无序集合</p>
-<p>内容不重复</p>
-<h3 id="ZSET"><a href="#ZSET" class="headerlink" title="ZSET"></a>ZSET</h3><p>SET+</p>
-<p>每个元素都会关联一个double 类型的分数score</p>
-<p>score可重复</p>
-<h2 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h2><h3 id="key相关"><a href="#key相关" class="headerlink" title="key相关"></a><code>key</code>相关</h3><p><code>set,del,dump,exists,ttl,expire,persist,pexpire,pttl,keys</code></p>
-<p>set：插入记录，返回OK成功，重复插入统一个值显示OK，但只要一条记录</p>
-<p>get：获取key中的值，无值返回(nil)</p>
-<p>del：删除记录，成功显示<code>(interger) 1</code></p>
-<p>dump：序列化给定的key</p>
-<p>exist：查询给定的Key是否存在，存在返回<code>(interger) 1</code>，否则返回<code>(interger) 0</code></p>
-<p>ttl:查询超时时间 单位s，-1表示key存在且未设置过期时间，-2表示key不存在或已过期</p>
-<p>pttl：查询超时时间，单位ms</p>
-<p>expire:设置过期时间s</p>
-<p>pexire:设置过去时间ms</p>
-<p>persisit:移出key的过期时间</p>
-<p>keys：查询匹配的所有key</p>
-<p><img src="https://files.catbox.moe/tuho0h.png" alt="test"></p>
-<h3 id="STRING-1"><a href="#STRING-1" class="headerlink" title="STRING"></a><code>STRING</code></h3><p><code>append,decr,decrby,get,getrange,getset,incr,incrby,incrbyfloat,mget,mset,setex,psetex,setnx,msetnx,setrange,strlen</code></p>
-<ul>
-<li>append:</li>
-<li>decr:+1</li>
-<li>decrby: +value</li>
-<li>get</li>
-<li>getrange : get start~end</li>
-<li>getset: get 并set</li>
-<li>mget,mset：批量get,set</li>
-<li>setex: set并设置过期时间</li>
-<li>psetex</li>
-<li>setnx:不存在时set,成功返回1，失败（已存在）返回0</li>
-<li>msetnx:批量setnx，如果有一个存在，则都不执行</li>
-<li>setrange:定位set，已存在点覆盖，无值点’\x00’</li>
-<li>strlen</li>
-</ul>
-<p><img src="https://files.catbox.moe/45lje8.png" alt="test2"></p>
-<h3 id="STRING中的BIT"><a href="#STRING中的BIT" class="headerlink" title="STRING中的BIT"></a><code>STRING</code>中的<code>BIT</code></h3><figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">getbit,setbit,bitop,bitcount,bitpos</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://files.catbox.moe/cju8za.png" alt="testBit"></p>
-<h3 id="list"><a href="#list" class="headerlink" title="list"></a>list</h3><p><code>lpush,lrange,rpush,rpop,lpop,lindex,ltrim,blpop</code></p>
-<p>lpush list value： 从左到右，在list的头部插入数据</p>
-<p>rpush list value：从左到右，在list的尾部插入数据</p>
-<p>lrange list start end:从左到右显示数据</p>
-<p>rpop list:弹出list尾部数据</p>
-<p>lpop list:弹出list头部数据</p>
-<p>lindex list index:显示指定下标的数据</p>
-<p>ltrim list start end:修剪list中start~end以外的部分</p>
-<p>blpop list timeout : 阻塞式弹出list最左边的数据，若list为空则阻塞timeout秒</p>
-<h3 id="set"><a href="#set" class="headerlink" title="set"></a>set</h3><figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">sadd,srem,sismember,scard,smember,srandmember,spop,smov,sdiff,sdiffstore,sinter,sintersotre,sunion,sunionstore</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>sadd set value:添加</li>
-<li>srem set value:删除</li>
-<li>sismember set value:判断value是否是set的成员</li>
-<li>scard set:set的元素个数</li>
-<li>smember set:输出set的元素</li>
-<li>srandmember set [count=1]:随机输出count个元素，<ul>
-<li>0&lt;count&lt;scard ：随机输出count个元素；</li>
-<li>count&gt;scard：输出scard个元素；</li>
-<li>-scard&lt;count&lt;0:随机输出count个元素；</li>
-<li>count&lt;-scard：随机输出count个元素，可重复</li>
-</ul>
-</li>
-<li>sdiff s1 s2:s1-s2差集</li>
-<li>…</li>
-</ul>
-<h3 id="hash"><a href="#hash" class="headerlink" title="hash"></a>hash</h3><figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">hset,hget,hmset,hmget,hdel,hsetnx,hvals,hkeys,hgetall,hexists,hincrby,hincrbyfloat,hlen,hstrlen</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://files.catbox.moe/iiagj2.png" alt="testHash"></p>
-<h3 id="zset"><a href="#zset" class="headerlink" title="zset"></a>zset</h3><figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">zadd,zscore,zrange,zrevrange,zcard,zcount,zrangebyscore,zrank,zrevrank,zincrby,zinterstore,zrem,zlexcount,zrangebylex</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>zadd zset member score [member score …] ：增</li>
-<li>zscore zset member:查score</li>
-<li>zrange zset start end :查</li>
-<li>zcard zset</li>
-<li>zcount zset min max</li>
-<li>zrank zset member</li>
-<li>..</li>
-<li>zlexcount zset min max:集合中score相同时，字典序下指定成员之间的数量</li>
-<li>zrangebylex zset min max：集合中score相同时，字典序下指定成员之间排列</li>
-</ul>
-<h2 id="发布订阅"><a href="#发布订阅" class="headerlink" title="发布订阅"></a>发布订阅</h2><p><code>subscribe</code></p>
-<p><code>publish</code></p>
-<h2 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h2><p>MULTI</p>
-<h3 id="事务异常"><a href="#事务异常" class="headerlink" title="事务异常"></a>事务异常</h3><p>WATCH</p>
-<h2 id="快照持久化"><a href="#快照持久化" class="headerlink" title="快照持久化"></a>快照持久化</h2><p><img src="https://files.catbox.moe/nuok7w.png" alt="dump"></p>
-<h2 id="AOF持久化"><a href="#AOF持久化" class="headerlink" title="AOF持久化"></a>AOF持久化</h2><h2 id="SpringBoot整合"><a href="#SpringBoot整合" class="headerlink" title="SpringBoot整合"></a>SpringBoot整合</h2><ol>
-<li>导入启动器包</li>
-</ol>
-<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-data-redis<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>配置连接信息</li>
-</ol>
-<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">    <span class="attr">redis:</span></span><br><span class="line">      <span class="attr">host:</span> <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span> </span><br><span class="line">      <span class="attr">port:</span> <span class="number">6379</span></span><br><span class="line">      <span class="attr">password:</span> <span class="number">123456</span></span><br><span class="line">      <span class="attr">jedis:</span></span><br><span class="line">        <span class="attr">pool:</span></span><br><span class="line">          <span class="attr">max-active:</span> <span class="number">8</span></span><br><span class="line">          <span class="attr">max-wait:</span> <span class="number">-1</span></span><br><span class="line">          <span class="attr">max-idle:</span> <span class="number">500</span></span><br><span class="line">          <span class="attr">min-idle:</span> <span class="number">0</span></span><br><span class="line">      <span class="attr">lettuce:</span></span><br><span class="line">        <span class="attr">shutdown-timeout:</span> <span class="number">0</span></span><br></pre></td></tr></table></figure>
-
-<ol start="3">
-<li>测试</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@RunWith(SpringRunner.class)</span></span><br><span class="line"><span class="meta">@SpringBootTest</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test_1</span></span>&#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> RedisTemplate&lt;String,String&gt;redisTemplate;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">set</span><span class="params">()</span></span>&#123;</span><br><span class="line">        redisTemplate.opsForValue().set(<span class="string">&quot;myKey&quot;</span>,<span class="string">&quot;myValue&quot;</span>);</span><br><span class="line">        System.out.println(redisTemplate.opsForValue().get(<span class="string">&quot;myKey&quot;</span>));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="配置序列化器"><a href="#配置序列化器" class="headerlink" title="配置序列化器"></a>配置序列化器</h3><p><strong>不配置序列化器，运行会显示乱码</strong></p>
-<p><a href="https://blog.csdn.net/qq_36781505/article/details/86612988">CSDN教程</a></p>
-<ol>
-<li>entity 实现序列化接口Serializable</li>
-<li>配置类设置序列化器</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RedisConfig</span></span>&#123;</span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> RedisTemplate&lt;String, Days&gt;redisTemplate(RedisConnectionFactory factory)&#123;</span><br><span class="line">        RedisTemplate&lt;String,Days&gt;template=<span class="keyword">new</span> RedisTemplate&lt;&gt;();</span><br><span class="line">        <span class="comment">//关联</span></span><br><span class="line">        template.setConnectionFactory(factory);</span><br><span class="line">        <span class="comment">//设置key的序列化器</span></span><br><span class="line">        template.setKeySerializer(<span class="keyword">new</span> StringRedisSerializer());</span><br><span class="line">        <span class="comment">//设置value的序列化器</span></span><br><span class="line">        template.setValueSerializer(<span class="keyword">new</span> Jackson2JsonRedisSerializer&lt;&gt;(Days.class));</span><br><span class="line">        <span class="keyword">return</span> template;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ol start="3">
-<li>测试类:</li>
-</ol>
-<p><code>@Autowired</code></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@RunWith(SpringRunner.class)</span></span><br><span class="line"><span class="meta">@SpringBootTest</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RedisTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> RedisTemplate&lt;String,Days&gt; redisTemplate;</span><br><span class="line">    <span class="keyword">private</span> Days d;</span><br><span class="line">    <span class="meta">@Before</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">before</span><span class="params">()</span></span>&#123;</span><br><span class="line">        d=<span class="keyword">new</span> Days();</span><br><span class="line">        d.setDate(<span class="string">&quot;123&quot;</span>);</span><br><span class="line">        d.setDaysId(<span class="string">&quot;456&quot;</span>);</span><br><span class="line">        d.setItemNumber(<span class="number">123</span>);</span><br><span class="line">        d.setOpenId(<span class="string">&quot;dawda&quot;</span>);</span><br><span class="line">        d.setTitle(<span class="string">&quot;title&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testSet</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.redisTemplate.opsForValue().set(<span class="string">&quot;days&quot;</span>,d);</span><br><span class="line">        System.out.println((redisTemplate.opsForValue().get(<span class="string">&quot;days&quot;</span>)));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <tags>
-        <tag>Redis</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Dubbo</title>
     <url>/2021/11/07/Dubbo/dubbo/</url>
     <content><![CDATA[<h1 id="Dubbo"><a href="#Dubbo" class="headerlink" title="Dubbo"></a>Dubbo</h1><h2 id="设计架构"><a href="#设计架构" class="headerlink" title="设计架构"></a>设计架构</h2><p><img src="https://files.catbox.moe/mnthc8.png" alt="设计架构"></p>
@@ -657,6 +526,137 @@ https://download.docker.com/linux/centos/docker-ce.repo
 ]]></content>
       <tags>
         <tag>Spring</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Redis</title>
+    <url>/2021/11/07/Redis/redis/</url>
+    <content><![CDATA[<h1 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h1><h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><h3 id="STRING"><a href="#STRING" class="headerlink" title="STRING"></a>STRING</h3><p>二进制安全，可以包含任何数据</p>
+<p>大小上下512M</p>
+<h3 id="LIST"><a href="#LIST" class="headerlink" title="LIST"></a>LIST</h3><span id="more"></span>
+<p>字符串列表</p>
+<p>按照插入顺序排序</p>
+<p>头部LEFT 尾部RIGHT</p>
+<h3 id="HASH"><a href="#HASH" class="headerlink" title="HASH"></a>HASH</h3><p>类似Java.Map</p>
+<p>键值对集合</p>
+<p>用于存储对象</p>
+<h3 id="SET"><a href="#SET" class="headerlink" title="SET"></a>SET</h3><p>STRING 类型的无序集合</p>
+<p>内容不重复</p>
+<h3 id="ZSET"><a href="#ZSET" class="headerlink" title="ZSET"></a>ZSET</h3><p>SET+</p>
+<p>每个元素都会关联一个double 类型的分数score</p>
+<p>score可重复</p>
+<h2 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h2><h3 id="key相关"><a href="#key相关" class="headerlink" title="key相关"></a><code>key</code>相关</h3><p><code>set,del,dump,exists,ttl,expire,persist,pexpire,pttl,keys</code></p>
+<p>set：插入记录，返回OK成功，重复插入统一个值显示OK，但只要一条记录</p>
+<p>get：获取key中的值，无值返回(nil)</p>
+<p>del：删除记录，成功显示<code>(interger) 1</code></p>
+<p>dump：序列化给定的key</p>
+<p>exist：查询给定的Key是否存在，存在返回<code>(interger) 1</code>，否则返回<code>(interger) 0</code></p>
+<p>ttl:查询超时时间 单位s，-1表示key存在且未设置过期时间，-2表示key不存在或已过期</p>
+<p>pttl：查询超时时间，单位ms</p>
+<p>expire:设置过期时间s</p>
+<p>pexire:设置过去时间ms</p>
+<p>persisit:移出key的过期时间</p>
+<p>keys：查询匹配的所有key</p>
+<p><img src="https://files.catbox.moe/tuho0h.png" alt="test"></p>
+<h3 id="STRING-1"><a href="#STRING-1" class="headerlink" title="STRING"></a><code>STRING</code></h3><p><code>append,decr,decrby,get,getrange,getset,incr,incrby,incrbyfloat,mget,mset,setex,psetex,setnx,msetnx,setrange,strlen</code></p>
+<ul>
+<li>append:</li>
+<li>decr:+1</li>
+<li>decrby: +value</li>
+<li>get</li>
+<li>getrange : get start~end</li>
+<li>getset: get 并set</li>
+<li>mget,mset：批量get,set</li>
+<li>setex: set并设置过期时间</li>
+<li>psetex</li>
+<li>setnx:不存在时set,成功返回1，失败（已存在）返回0</li>
+<li>msetnx:批量setnx，如果有一个存在，则都不执行</li>
+<li>setrange:定位set，已存在点覆盖，无值点’\x00’</li>
+<li>strlen</li>
+</ul>
+<p><img src="https://files.catbox.moe/45lje8.png" alt="test2"></p>
+<h3 id="STRING中的BIT"><a href="#STRING中的BIT" class="headerlink" title="STRING中的BIT"></a><code>STRING</code>中的<code>BIT</code></h3><figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">getbit,setbit,bitop,bitcount,bitpos</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://files.catbox.moe/cju8za.png" alt="testBit"></p>
+<h3 id="list"><a href="#list" class="headerlink" title="list"></a>list</h3><p><code>lpush,lrange,rpush,rpop,lpop,lindex,ltrim,blpop</code></p>
+<p>lpush list value： 从左到右，在list的头部插入数据</p>
+<p>rpush list value：从左到右，在list的尾部插入数据</p>
+<p>lrange list start end:从左到右显示数据</p>
+<p>rpop list:弹出list尾部数据</p>
+<p>lpop list:弹出list头部数据</p>
+<p>lindex list index:显示指定下标的数据</p>
+<p>ltrim list start end:修剪list中start~end以外的部分</p>
+<p>blpop list timeout : 阻塞式弹出list最左边的数据，若list为空则阻塞timeout秒</p>
+<h3 id="set"><a href="#set" class="headerlink" title="set"></a>set</h3><figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">sadd,srem,sismember,scard,smember,srandmember,spop,smov,sdiff,sdiffstore,sinter,sintersotre,sunion,sunionstore</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>sadd set value:添加</li>
+<li>srem set value:删除</li>
+<li>sismember set value:判断value是否是set的成员</li>
+<li>scard set:set的元素个数</li>
+<li>smember set:输出set的元素</li>
+<li>srandmember set [count=1]:随机输出count个元素，<ul>
+<li>0&lt;count&lt;scard ：随机输出count个元素；</li>
+<li>count&gt;scard：输出scard个元素；</li>
+<li>-scard&lt;count&lt;0:随机输出count个元素；</li>
+<li>count&lt;-scard：随机输出count个元素，可重复</li>
+</ul>
+</li>
+<li>sdiff s1 s2:s1-s2差集</li>
+<li>…</li>
+</ul>
+<h3 id="hash"><a href="#hash" class="headerlink" title="hash"></a>hash</h3><figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">hset,hget,hmset,hmget,hdel,hsetnx,hvals,hkeys,hgetall,hexists,hincrby,hincrbyfloat,hlen,hstrlen</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://files.catbox.moe/iiagj2.png" alt="testHash"></p>
+<h3 id="zset"><a href="#zset" class="headerlink" title="zset"></a>zset</h3><figure class="highlight cmd"><table><tr><td class="code"><pre><span class="line">zadd,zscore,zrange,zrevrange,zcard,zcount,zrangebyscore,zrank,zrevrank,zincrby,zinterstore,zrem,zlexcount,zrangebylex</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>zadd zset member score [member score …] ：增</li>
+<li>zscore zset member:查score</li>
+<li>zrange zset start end :查</li>
+<li>zcard zset</li>
+<li>zcount zset min max</li>
+<li>zrank zset member</li>
+<li>..</li>
+<li>zlexcount zset min max:集合中score相同时，字典序下指定成员之间的数量</li>
+<li>zrangebylex zset min max：集合中score相同时，字典序下指定成员之间排列</li>
+</ul>
+<h2 id="发布订阅"><a href="#发布订阅" class="headerlink" title="发布订阅"></a>发布订阅</h2><p><code>subscribe</code></p>
+<p><code>publish</code></p>
+<h2 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h2><p>MULTI</p>
+<h3 id="事务异常"><a href="#事务异常" class="headerlink" title="事务异常"></a>事务异常</h3><p>WATCH</p>
+<h2 id="快照持久化"><a href="#快照持久化" class="headerlink" title="快照持久化"></a>快照持久化</h2><p><img src="https://files.catbox.moe/nuok7w.png" alt="dump"></p>
+<h2 id="AOF持久化"><a href="#AOF持久化" class="headerlink" title="AOF持久化"></a>AOF持久化</h2><h2 id="SpringBoot整合"><a href="#SpringBoot整合" class="headerlink" title="SpringBoot整合"></a>SpringBoot整合</h2><ol>
+<li>导入启动器包</li>
+</ol>
+<figure class="highlight xml"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-data-redis<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>配置连接信息</li>
+</ol>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">    <span class="attr">redis:</span></span><br><span class="line">      <span class="attr">host:</span> <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span> </span><br><span class="line">      <span class="attr">port:</span> <span class="number">6379</span></span><br><span class="line">      <span class="attr">password:</span> <span class="number">123456</span></span><br><span class="line">      <span class="attr">jedis:</span></span><br><span class="line">        <span class="attr">pool:</span></span><br><span class="line">          <span class="attr">max-active:</span> <span class="number">8</span></span><br><span class="line">          <span class="attr">max-wait:</span> <span class="number">-1</span></span><br><span class="line">          <span class="attr">max-idle:</span> <span class="number">500</span></span><br><span class="line">          <span class="attr">min-idle:</span> <span class="number">0</span></span><br><span class="line">      <span class="attr">lettuce:</span></span><br><span class="line">        <span class="attr">shutdown-timeout:</span> <span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>测试</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@RunWith(SpringRunner.class)</span></span><br><span class="line"><span class="meta">@SpringBootTest</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test_1</span></span>&#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> RedisTemplate&lt;String,String&gt;redisTemplate;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">set</span><span class="params">()</span></span>&#123;</span><br><span class="line">        redisTemplate.opsForValue().set(<span class="string">&quot;myKey&quot;</span>,<span class="string">&quot;myValue&quot;</span>);</span><br><span class="line">        System.out.println(redisTemplate.opsForValue().get(<span class="string">&quot;myKey&quot;</span>));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="配置序列化器"><a href="#配置序列化器" class="headerlink" title="配置序列化器"></a>配置序列化器</h3><p><strong>不配置序列化器，运行会显示乱码</strong></p>
+<p><a href="https://blog.csdn.net/qq_36781505/article/details/86612988">CSDN教程</a></p>
+<ol>
+<li>entity 实现序列化接口Serializable</li>
+<li>配置类设置序列化器</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RedisConfig</span></span>&#123;</span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="keyword">public</span> RedisTemplate&lt;String, Days&gt;redisTemplate(RedisConnectionFactory factory)&#123;</span><br><span class="line">        RedisTemplate&lt;String,Days&gt;template=<span class="keyword">new</span> RedisTemplate&lt;&gt;();</span><br><span class="line">        <span class="comment">//关联</span></span><br><span class="line">        template.setConnectionFactory(factory);</span><br><span class="line">        <span class="comment">//设置key的序列化器</span></span><br><span class="line">        template.setKeySerializer(<span class="keyword">new</span> StringRedisSerializer());</span><br><span class="line">        <span class="comment">//设置value的序列化器</span></span><br><span class="line">        template.setValueSerializer(<span class="keyword">new</span> Jackson2JsonRedisSerializer&lt;&gt;(Days.class));</span><br><span class="line">        <span class="keyword">return</span> template;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>测试类:</li>
+</ol>
+<p><code>@Autowired</code></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@RunWith(SpringRunner.class)</span></span><br><span class="line"><span class="meta">@SpringBootTest</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RedisTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> RedisTemplate&lt;String,Days&gt; redisTemplate;</span><br><span class="line">    <span class="keyword">private</span> Days d;</span><br><span class="line">    <span class="meta">@Before</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">before</span><span class="params">()</span></span>&#123;</span><br><span class="line">        d=<span class="keyword">new</span> Days();</span><br><span class="line">        d.setDate(<span class="string">&quot;123&quot;</span>);</span><br><span class="line">        d.setDaysId(<span class="string">&quot;456&quot;</span>);</span><br><span class="line">        d.setItemNumber(<span class="number">123</span>);</span><br><span class="line">        d.setOpenId(<span class="string">&quot;dawda&quot;</span>);</span><br><span class="line">        d.setTitle(<span class="string">&quot;title&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testSet</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.redisTemplate.opsForValue().set(<span class="string">&quot;days&quot;</span>,d);</span><br><span class="line">        System.out.println((redisTemplate.opsForValue().get(<span class="string">&quot;days&quot;</span>)));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>Redis</tag>
       </tags>
   </entry>
 </search>
