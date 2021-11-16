@@ -22,6 +22,50 @@
       </tags>
   </entry>
   <entry>
+    <title>自定义注解</title>
+    <url>/2021/08/03/%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B3%A8%E8%A7%A3/</url>
+    <content><![CDATA[<h2 id="注解类"><a href="#注解类" class="headerlink" title="注解类"></a>注解类</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Target(ElementType.METHOD)</span> <span class="comment">//作用于方法</span></span><br><span class="line"><span class="meta">@Retention(RetentionPolicy.RUNTIME)</span> <span class="comment">// 运行时有效</span></span><br><span class="line"><span class="meta">@Documented</span> <span class="comment">//被 javadoc工具记录</span></span><br><span class="line"><span class="meta">@Inherited</span> <span class="comment">//可继承</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> BatchQuery &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+<h2 id="自定义注解"><a href="#自定义注解" class="headerlink" title="自定义注解"></a>自定义注解</h2><p><code>@interface</code></p>
+<p>在底层实现上，所有定义的注解都会自动继承java.lang.annotation.Annotation接口</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Aspect</span> <span class="comment">//标注增强处理类（切面类）</span></span><br><span class="line"><span class="meta">@Component</span> <span class="comment">//交由Spring容器管理</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> CherryAnnotation &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="pointcut注解"><a href="#pointcut注解" class="headerlink" title="@pointcut注解"></a><code>@pointcut</code>注解</h2><p>Pointcut(切入点)： JoinPoint的集合，是程序中需要注入Advice的位置的集合，指明Advice要在什么样的条件下才能被触发，在程序中主要体现为书写切入点表达式。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Pointcut(&quot;@annotation(com.ztesoft.zsmart.pot.annotation.BatchQuery)&quot;)</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Around注解"><a href="#Around注解" class="headerlink" title="@Around注解"></a><code>@Around</code>注解</h2><p>@Around注解：可以用来在调用一个具体方法前和调用后来完成一些具体的任务。</p>
+<p>=<code>@Before</code>+<code>@After</code></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Around(&quot;pointcut()&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">around</span><span class="params">(ProceedingJoinPoint joinPoint)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">        ....</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>也可以不使用<code>@pointcut</code></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//调用controller包下的任意类的任意方法时均会调用此方法</span></span><br><span class="line"><span class="meta">@Around(&quot;execution(* com.company.controller.*.*(..))&quot;)</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> Object <span class="title">run1</span><span class="params">(ProceedingJoinPoint joinPoint)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">  <span class="comment">//获取方法参数值数组</span></span><br><span class="line">  Object[] args = joinPoint.getArgs();</span><br><span class="line">  <span class="comment">//得到其方法签名</span></span><br><span class="line">  MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();</span><br><span class="line">  <span class="comment">//获取方法参数类型数组</span></span><br><span class="line">  Class[] paramTypeArray = methodSignature.getParameterTypes();</span><br><span class="line">  .......</span><br><span class="line">  logger.info(<span class="string">&quot;请求参数为&#123;&#125;&quot;</span>,args);</span><br><span class="line">  <span class="comment">//动态修改其参数</span></span><br><span class="line">  <span class="comment">//注意，如果调用joinPoint.proceed()方法，则修改的参数值不会生效，必须调用joinPoint.proceed(Object[] args)</span></span><br><span class="line">  Object result = joinPoint.proceed(args);</span><br><span class="line">  logger.info(<span class="string">&quot;响应结果为&#123;&#125;&quot;</span>,result);</span><br><span class="line">   <span class="comment">//如果这里不返回result，则目标对象实际返回值会被置为null</span></span><br><span class="line">  <span class="keyword">return</span> result;   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>如果我们还想利用其进行参数的修改，则调用时必须用joinPoint.proceed(Object[] args)方法，将修改后的参数进行回传。如果用joinPoint.proceed()方法，则修改后的参数并不会真正被使用。</strong></p>
+]]></content>
+      <tags>
+        <tag>其他</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>个人博客搭建</title>
+    <url>/2021/11/01/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/</url>
+    <content><![CDATA[<h1 id="安装Nodejs"><a href="#安装Nodejs" class="headerlink" title="安装Nodejs"></a>安装Nodejs</h1><p>node -v    #查看node版本<br>npm -v    #查看npm版本<br>npm install -g cnpm –registry=<a href="http://registry.npm.taobao.org/">http://registry.npm.taobao.org</a>    #安装淘宝的cnpm 管理器<br>cnpm -v    #查看cnpm版本<br>cnpm install -g hexo-cli    #安装hexo框架<br>hexo -v    #查看hexo版本</p>
+<span id="more"></span>
+
+<p>mkdir blog    #创建blog目录<br>cd blog     #进入blog目录<br>sudo hexo init     #生成博客 初始化博客<br>hexo s    #启动本地博客服务<br><a href="http://localhost:4000/">http://localhost:4000/</a>    #本地访问地址<br>hexo n 我的第一篇文章 #创建新的文章</p>
+<h1 id="返回blog目录"><a href="#返回blog目录" class="headerlink" title="返回blog目录"></a>返回blog目录</h1><p>hexo clean #清理<br>hexo g #生成</p>
+<h1 id="Github创建一个新的仓库-YourGithubName-github-io"><a href="#Github创建一个新的仓库-YourGithubName-github-io" class="headerlink" title="Github创建一个新的仓库 YourGithubName.github.io"></a>Github创建一个新的仓库 YourGithubName.github.io</h1><h2 id="cnpm-install-–save-hexo-deployer-git-在blog目录下安装git部署插件"><a href="#cnpm-install-–save-hexo-deployer-git-在blog目录下安装git部署插件" class="headerlink" title="cnpm install –save hexo-deployer-git #在blog目录下安装git部署插件"></a>cnpm install –save hexo-deployer-git #在blog目录下安装git部署插件</h2><h1 id="配置-config-yml"><a href="#配置-config-yml" class="headerlink" title="配置_config.yml"></a>配置_config.yml</h1><hr>
+<h1 id="Deployment"><a href="#Deployment" class="headerlink" title="Deployment"></a>Deployment</h1><h2 id="Docs-https-hexo-io-docs-deployment-html"><a href="#Docs-https-hexo-io-docs-deployment-html" class="headerlink" title="Docs: https://hexo.io/docs/deployment.html"></a>Docs: <a href="https://hexo.io/docs/deployment.html">https://hexo.io/docs/deployment.html</a></h2><p>deploy:<br>type: git<br>repo: <a href="https://github.com/YourGithubName/YourGithubName.github.io.git">https://github.com/YourGithubName/YourGithubName.github.io.git</a><br>branch: master</p>
+<hr>
+<p>hexo d    #部署到Github仓库里<br><a href="https://yourgithubname.github.io/">https://YourGithubName.github.io/</a>  #访问这个地址可以查看博客</p>
+<p>git clone <a href="https://github.com/litten/hexo-theme-yilia.git">https://github.com/litten/hexo-theme-yilia.git</a> themes/yilia  #下载yilia主题到本地</p>
+<h1 id="修改hexo根目录下的-config-yml-文件-：-theme-yilia"><a href="#修改hexo根目录下的-config-yml-文件-：-theme-yilia" class="headerlink" title="修改hexo根目录下的 _config.yml 文件 ： theme: yilia"></a>修改hexo根目录下的 _config.yml 文件 ： theme: yilia</h1><p>hexo c    #清理一下<br>hexo g    #生成<br>hexo d    #部署到远程Github仓库<br><a href="https://yourgithubname.github.io/">https://YourGithubName.github.io/</a></p>
+<h1 id="查看博客"><a href="#查看博客" class="headerlink" title="查看博客"></a>查看博客</h1>]]></content>
+      <tags>
+        <tag>实践</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>个人服务器搭建</title>
     <url>/2021/11/10/%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA/</url>
     <content><![CDATA[<h2 id="阿里云购买服务器"><a href="#阿里云购买服务器" class="headerlink" title="阿里云购买服务器"></a>阿里云购买服务器</h2><h2 id="安全组设置"><a href="#安全组设置" class="headerlink" title="安全组设置"></a>安全组设置</h2><p>Linux防火墙的端口开完后，一定还需要在阿里云设置安全组规则，开放端口号，否则外部无法访问<br><img src="https://files.catbox.moe/sa3bbm.png"></p>
@@ -120,235 +164,6 @@ https://download.docker.com/linux/centos/docker-ce.repo
 ]]></content>
       <tags>
         <tag>实践</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>个人博客搭建</title>
-    <url>/2021/11/01/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/</url>
-    <content><![CDATA[<h1 id="安装Nodejs"><a href="#安装Nodejs" class="headerlink" title="安装Nodejs"></a>安装Nodejs</h1><p>node -v    #查看node版本<br>npm -v    #查看npm版本<br>npm install -g cnpm –registry=<a href="http://registry.npm.taobao.org/">http://registry.npm.taobao.org</a>    #安装淘宝的cnpm 管理器<br>cnpm -v    #查看cnpm版本<br>cnpm install -g hexo-cli    #安装hexo框架<br>hexo -v    #查看hexo版本</p>
-<span id="more"></span>
-
-<p>mkdir blog    #创建blog目录<br>cd blog     #进入blog目录<br>sudo hexo init     #生成博客 初始化博客<br>hexo s    #启动本地博客服务<br><a href="http://localhost:4000/">http://localhost:4000/</a>    #本地访问地址<br>hexo n 我的第一篇文章 #创建新的文章</p>
-<h1 id="返回blog目录"><a href="#返回blog目录" class="headerlink" title="返回blog目录"></a>返回blog目录</h1><p>hexo clean #清理<br>hexo g #生成</p>
-<h1 id="Github创建一个新的仓库-YourGithubName-github-io"><a href="#Github创建一个新的仓库-YourGithubName-github-io" class="headerlink" title="Github创建一个新的仓库 YourGithubName.github.io"></a>Github创建一个新的仓库 YourGithubName.github.io</h1><h2 id="cnpm-install-–save-hexo-deployer-git-在blog目录下安装git部署插件"><a href="#cnpm-install-–save-hexo-deployer-git-在blog目录下安装git部署插件" class="headerlink" title="cnpm install –save hexo-deployer-git #在blog目录下安装git部署插件"></a>cnpm install –save hexo-deployer-git #在blog目录下安装git部署插件</h2><h1 id="配置-config-yml"><a href="#配置-config-yml" class="headerlink" title="配置_config.yml"></a>配置_config.yml</h1><hr>
-<h1 id="Deployment"><a href="#Deployment" class="headerlink" title="Deployment"></a>Deployment</h1><h2 id="Docs-https-hexo-io-docs-deployment-html"><a href="#Docs-https-hexo-io-docs-deployment-html" class="headerlink" title="Docs: https://hexo.io/docs/deployment.html"></a>Docs: <a href="https://hexo.io/docs/deployment.html">https://hexo.io/docs/deployment.html</a></h2><p>deploy:<br>type: git<br>repo: <a href="https://github.com/YourGithubName/YourGithubName.github.io.git">https://github.com/YourGithubName/YourGithubName.github.io.git</a><br>branch: master</p>
-<hr>
-<p>hexo d    #部署到Github仓库里<br><a href="https://yourgithubname.github.io/">https://YourGithubName.github.io/</a>  #访问这个地址可以查看博客</p>
-<p>git clone <a href="https://github.com/litten/hexo-theme-yilia.git">https://github.com/litten/hexo-theme-yilia.git</a> themes/yilia  #下载yilia主题到本地</p>
-<h1 id="修改hexo根目录下的-config-yml-文件-：-theme-yilia"><a href="#修改hexo根目录下的-config-yml-文件-：-theme-yilia" class="headerlink" title="修改hexo根目录下的 _config.yml 文件 ： theme: yilia"></a>修改hexo根目录下的 _config.yml 文件 ： theme: yilia</h1><p>hexo c    #清理一下<br>hexo g    #生成<br>hexo d    #部署到远程Github仓库<br><a href="https://yourgithubname.github.io/">https://YourGithubName.github.io/</a></p>
-<h1 id="查看博客"><a href="#查看博客" class="headerlink" title="查看博客"></a>查看博客</h1>]]></content>
-      <tags>
-        <tag>实践</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>自定义注解</title>
-    <url>/2021/08/03/%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B3%A8%E8%A7%A3/</url>
-    <content><![CDATA[<h2 id="注解类"><a href="#注解类" class="headerlink" title="注解类"></a>注解类</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Target(ElementType.METHOD)</span> <span class="comment">//作用于方法</span></span><br><span class="line"><span class="meta">@Retention(RetentionPolicy.RUNTIME)</span> <span class="comment">// 运行时有效</span></span><br><span class="line"><span class="meta">@Documented</span> <span class="comment">//被 javadoc工具记录</span></span><br><span class="line"><span class="meta">@Inherited</span> <span class="comment">//可继承</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> BatchQuery &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<span id="more"></span>
-<h2 id="自定义注解"><a href="#自定义注解" class="headerlink" title="自定义注解"></a>自定义注解</h2><p><code>@interface</code></p>
-<p>在底层实现上，所有定义的注解都会自动继承java.lang.annotation.Annotation接口</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Aspect</span> <span class="comment">//标注增强处理类（切面类）</span></span><br><span class="line"><span class="meta">@Component</span> <span class="comment">//交由Spring容器管理</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> CherryAnnotation &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="pointcut注解"><a href="#pointcut注解" class="headerlink" title="@pointcut注解"></a><code>@pointcut</code>注解</h2><p>Pointcut(切入点)： JoinPoint的集合，是程序中需要注入Advice的位置的集合，指明Advice要在什么样的条件下才能被触发，在程序中主要体现为书写切入点表达式。</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Pointcut(&quot;@annotation(com.ztesoft.zsmart.pot.annotation.BatchQuery)&quot;)</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="Around注解"><a href="#Around注解" class="headerlink" title="@Around注解"></a><code>@Around</code>注解</h2><p>@Around注解：可以用来在调用一个具体方法前和调用后来完成一些具体的任务。</p>
-<p>=<code>@Before</code>+<code>@After</code></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Around(&quot;pointcut()&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">around</span><span class="params">(ProceedingJoinPoint joinPoint)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">        ....</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<p>也可以不使用<code>@pointcut</code></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//调用controller包下的任意类的任意方法时均会调用此方法</span></span><br><span class="line"><span class="meta">@Around(&quot;execution(* com.company.controller.*.*(..))&quot;)</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> Object <span class="title">run1</span><span class="params">(ProceedingJoinPoint joinPoint)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">  <span class="comment">//获取方法参数值数组</span></span><br><span class="line">  Object[] args = joinPoint.getArgs();</span><br><span class="line">  <span class="comment">//得到其方法签名</span></span><br><span class="line">  MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();</span><br><span class="line">  <span class="comment">//获取方法参数类型数组</span></span><br><span class="line">  Class[] paramTypeArray = methodSignature.getParameterTypes();</span><br><span class="line">  .......</span><br><span class="line">  logger.info(<span class="string">&quot;请求参数为&#123;&#125;&quot;</span>,args);</span><br><span class="line">  <span class="comment">//动态修改其参数</span></span><br><span class="line">  <span class="comment">//注意，如果调用joinPoint.proceed()方法，则修改的参数值不会生效，必须调用joinPoint.proceed(Object[] args)</span></span><br><span class="line">  Object result = joinPoint.proceed(args);</span><br><span class="line">  logger.info(<span class="string">&quot;响应结果为&#123;&#125;&quot;</span>,result);</span><br><span class="line">   <span class="comment">//如果这里不返回result，则目标对象实际返回值会被置为null</span></span><br><span class="line">  <span class="keyword">return</span> result;   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>如果我们还想利用其进行参数的修改，则调用时必须用joinPoint.proceed(Object[] args)方法，将修改后的参数进行回传。如果用joinPoint.proceed()方法，则修改后的参数并不会真正被使用。</strong></p>
-]]></content>
-      <tags>
-        <tag>其他</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Spring Security</title>
-    <url>/2021/07/30/SpringSecurity/SpringSecurity/</url>
-    <content><![CDATA[<h1 id="SpringSecurity"><a href="#SpringSecurity" class="headerlink" title="SpringSecurity"></a>SpringSecurity</h1><p><a href="/https://blog.csdn.net/qq_40298902/article/details/106433192">CSDN实例</a></p>
-<h2 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h2><p>SpringSecurity本质是一个过滤器链</p>
-<span id="more"></span>
-<ul>
-<li><p>FilterSecurityInterceptor：方法级的权限过滤器，基本位于过滤链的最底部</p>
-</li>
-<li><p>ExceptionTranslationFilter:异常过滤器，用来处理再认证授权过程中抛出的异常</p>
-<ul>
-<li>这两个Filter通常是结合在一起用的，前者负责处理后者所抛出的异常并做相应的处理，后者主要用于鉴权。<code>ExceptionTranslationFilter</code>在处理异常时，如果异常为<code>AuthenticationException</code>类型，表示用户认证都失败了(比如还没有经过认证)，此时将调用<code>AuthenticationEntryPoint</code>开启认证过程，比如向用户展示登录页面；如果异常为<code>AccessDeniedException</code>，表示用户可能已经登录但是没有足够的权限，此时将调用<code>AccessDeniedHandler</code>，比如向用户展示“你没有权限”的通知页面。</li>
-</ul>
-</li>
-<li><p>UsernamePasswordAuthenticationFilter：对<code>/login</code>的POST请求做拦截，校验表单中用户名密码</p>
-<ul>
-<li>用于处理基于Form登录的认证，认证成功重定向到指定页面，认证失败向用户重新返回登录界面并提示错误。<code>UsernamePasswordAuthenticationFilter</code>继承自<code>AbstractAuthenticationProcessingFilter</code>，<code>AbstractAuthenticationProcessingFilter</code>可以配置一个<code>AuthenticationSuccessHandler</code>和一个<code>AuthenticationFailureHandler</code>，认证成功之后将调用<code>AuthenticationSuccessHandler</code>，比如像<code>UsernamePasswordAuthenticationFilter</code>一样重定向到某个页面，也可以根据自定义向用户返回一个JWT的Token；认证失败(比如用户名或密码不正确)后将调用<code>AuthenticationFailureHandler</code>，比如像<code>UsernamePasswordAuthenticationFilter</code>一样重新返回登录页面，也可以根据自定义向用户返回一个401状态码。</li>
-<li><code>AbstractAuthenticationProcessingFilter</code>并不完成认证逻辑，而是将其交给<code>AuthenticationManager</code>，<code>AuthenticationManager</code>进而代理给<code>AuthenticationProvider</code>，<code>AuthenticationProvider</code>验证用户提供的凭证是否正确(比如从数据库加载用户的密码然后与用户提供的密码对比，或者与LDAP服务器通信验证用户名和密码)。</li>
-</ul>
-</li>
-</ul>
-<h3 id="过滤器加载"><a href="#过滤器加载" class="headerlink" title="过滤器加载"></a>过滤器加载</h3><ol>
-<li>使用SpringSecurity配置过滤器<ol>
-<li>DelegatingFilterProxy</li>
-</ol>
-</li>
-</ol>
-<p><img src="https://files.catbox.moe/lay6v0.png" alt="Filter"></p>
-<h2 id="UserDetailsService接口"><a href="#UserDetailsService接口" class="headerlink" title="UserDetailsService接口"></a>UserDetailsService接口</h2><p>自定义账号密码逻辑，数据库？内存？ （redis?</p>
-<p>查询数据库用户名和密码的过程</p>
-<ul>
-<li>创建类继承UsernamePasswordAuthenticationFilter，重写其中三个方法<ul>
-<li>attemptAuthentication 判断用户名密码</li>
-<li>successfulAuthentication 成功</li>
-<li>unsuccessfulAuthentication 失败</li>
-</ul>
-</li>
-<li>创建类实现UserDetailsService接口，编写查询数据过程，返回User对象（User对象是安全框架提供的对象）</li>
-</ul>
-<h2 id="PasswordEncoder"><a href="#PasswordEncoder" class="headerlink" title="PasswordEncoder"></a>PasswordEncoder</h2><p>对密码加密接口</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">BCryptPasswordEncoder bCryptPasswordEncoder =<span class="keyword">new</span> BCryptPasswordEncoder();</span><br><span class="line">String pwd=bCryptPasswordEncoder.encode(<span class="string">&quot;password&quot;</span>);</span><br></pre></td></tr></table></figure>
-
-<h2 id="web权限方案"><a href="#web权限方案" class="headerlink" title="web权限方案"></a>web权限方案</h2><p><strong>认证</strong>与<strong>授权</strong></p>
-<h3 id="设置登录用户名密码"><a href="#设置登录用户名密码" class="headerlink" title="设置登录用户名密码"></a>设置登录用户名密码</h3><ol>
-<li><p>配置文件</p>
-<p>application.properties中</p>
-<ol>
-<li>spring.security.user.name=</li>
-<li>spring.security.user.password=</li>
-</ol>
-</li>
-<li><p>配置类</p>
-<ol>
-<li>@Configuration</li>
-<li>extends WebSecurityConfigurerAdapter</li>
-<li><img src="https://files.catbox.moe/6zo8c1.png"></li>
-</ol>
-</li>
-<li><p>自定义实现类UserDetailsService</p>
-<ol>
-<li>创建配置类，设置使用哪个userDetailsService实现类<ol>
-<li><img src="https://files.catbox.moe/ej0nnn.png"></li>
-</ol>
-</li>
-<li>编写实现类，返回User对象，User对象有用户名密码和操作<ol>
-<li><img src="https://files.catbox.moe/rrcq8k.png"></li>
-</ol>
-</li>
-</ol>
-</li>
-</ol>
-<h3 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h3><ol>
-<li>引入依赖</li>
-<li>创建数据库</li>
-<li>创建实体类Users</li>
-<li>创建mapper接口,<code>interface UserMapper</code> ,增删改查函数</li>
-<li>mapper.xml文件对应接口的增删改查 (使用MyBatis-Plus可简化45，接口继承BaseMapper&lt;Users&gt;)</li>
-<li>在UserDetailsService的自定义实现类中调用mapper中的方法查询数据库对用户的认证信息（根据username查询）</li>
-<li>在启动类中添加@MapperScan(“Mapper所在包”)注释</li>
-<li>配置文件中配置数据库信息<ol>
-<li><img src="https://files.catbox.moe/whr6u5.png"></li>
-<li>springBoot2默认使用Mysql8;driver-class-name加cj;设置时区</li>
-</ol>
-</li>
-</ol>
-<h2 id="配置类configure设置"><a href="#配置类configure设置" class="headerlink" title="配置类configure设置"></a>配置类configure设置</h2><p>自定义登录页面、403页面等</p>
-<p><img src="https://files.catbox.moe/j63v8t.png" alt="config"></p>
-<p><img src="https://files.catbox.moe/cjkuom.png" alt="403"></p>
-<h2 id="基于角色和权限实现访问控制"><a href="#基于角色和权限实现访问控制" class="headerlink" title="基于角色和权限实现访问控制"></a>基于角色和权限实现访问控制</h2><h3 id="1-hasAuthority"><a href="#1-hasAuthority" class="headerlink" title="1. hasAuthority"></a>1. hasAuthority</h3><p>如果当前主体具有指定的权限，有则返回true，否则false</p>
-<p><img src="https://files.catbox.moe/jeqjyj.png" alt="hasAuthority"></p>
-<h3 id="2-hasAnyAuthority"><a href="#2-hasAnyAuthority" class="headerlink" title="2. hasAnyAuthority"></a>2. hasAnyAuthority</h3><p><img src="https://files.catbox.moe/bzvoxj.png"></p>
-<h3 id="3-hasRole"><a href="#3-hasRole" class="headerlink" title="3. hasRole"></a>3. hasRole</h3><p>底层代码中将role改为了ROLE_#{role}</p>
-<p><img src="https://files.catbox.moe/zoontv.png"></p>
-<h3 id="4-hasAnyRole"><a href="#4-hasAnyRole" class="headerlink" title="4. hasAnyRole"></a>4. hasAnyRole</h3><p>同上</p>
-<h2 id="注解使用"><a href="#注解使用" class="headerlink" title="注解使用"></a>注解使用</h2><h3 id="Secured"><a href="#Secured" class="headerlink" title="@Secured"></a>@Secured</h3><p>判断用户是否具有角色（其中匹配的字符串需要加上前缀”ROLE_”)</p>
-<p>开启注解功能<code>@EnableGlobalMethodSecurity(securedEnable=true)</code></p>
-<p>在控制器方法上放添加<code>@Secured(&#123;&quot;ROLE_normal&quot;,&quot;ROLE_admin&quot;&#125;)</code></p>
-<p><img src="https://files.catbox.moe/0av96c.png"></p>
-<h3 id="PreAuthorize"><a href="#PreAuthorize" class="headerlink" title="@PreAuthorize"></a>@PreAuthorize</h3><p>在进入方法前进行权限验证</p>
-<p><code>@PreAuthorize(&quot;hasAnyAuthority(&#39;admins&#39;)&quot;)</code>四个方法都可以填在( )里面</p>
-<p>开启注解功能<code>@EnableGlobalMethodSecurity(prePostEnabled=true)</code></p>
-<p><img src="https://files.catbox.moe/do2cpo.png"></p>
-<h3 id="PostAuthorize"><a href="#PostAuthorize" class="headerlink" title="@PostAuthorize"></a>@PostAuthorize</h3><p>方法执行之后进行权限验证，多用于返回值</p>
-<p>开启注解功能<code>@EnableGlobalMethodSecurity(prePostEnabled=true)</code></p>
-<p><code>@PostAuthorize(&quot;hasAnyAuthority(&#39;admins&#39;)&quot;)</code>四个方法都可以填在( )里面</p>
-<p><img src="https://files.catbox.moe/zh6p22.png"></p>
-<p>test:</p>
-<p><img src="https://files.catbox.moe/mntx2c.png"></p>
-<p>↑有输出但跳转到403页面</p>
-<h3 id="PostFilter"><a href="#PostFilter" class="headerlink" title="@PostFilter"></a>@PostFilter</h3><p>不常用</p>
-<p>对返回数据进行过滤</p>
-<p><img src="https://files.catbox.moe/f4cqge.png"></p>
-<h3 id="PreFilter"><a href="#PreFilter" class="headerlink" title="@PreFilter"></a>@PreFilter</h3><p>不常用</p>
-<p>对传入方法的数据进行过滤</p>
-<p><img src="https://files.catbox.moe/urcoyc.png"></p>
-<h2 id="用户注销"><a href="#用户注销" class="headerlink" title="用户注销"></a>用户注销</h2><p>配置类中添加退出配置</p>
-<p><code>http.logout().logoutUrl(&quot;/logout&quot;).logoutSuccessUrl(&quot;/index&quot;).permitAll()</code></p>
-<p>退出超链接：</p>
-<p><code>&lt;a href=&quot;/logout&quot;&gt;注销&lt;/a&gt;</code></p>
-<h2 id="基于数据库实现自动登录"><a href="#基于数据库实现自动登录" class="headerlink" title="基于数据库实现自动登录"></a>基于数据库实现自动登录</h2><p>“自动登录”“十天内免登陆”….</p>
-<ul>
-<li>cookie技术</li>
-<li>安全框架实现</li>
-</ul>
-<h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p><img src="https://files.catbox.moe/ddagu1.png" alt="步骤"></p>
-<h3 id="具体实现"><a href="#具体实现" class="headerlink" title="具体实现"></a>具体实现</h3><ol>
-<li>创建数据库 <code>JdbcTokenRepositoryImpl</code>中有建表sql语句</li>
-<li>修改配置类：注入数据源，配置操作数据库对象</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Autowired</span></span><br><span class="line"><span class="keyword">private</span> DataSource dataSource;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Bean</span> <span class="function"><span class="keyword">public</span> PersistenTokenRepository <span class="title">persistenTokenRepository</span><span class="params">()</span></span>&#123;</span><br><span class="line">    JdbcTokenRepositoryImpl jdbcTokenRepository=<span class="keyword">new</span> JdbcTokenRepositoryImpl(); </span><br><span class="line">    jdbcTokenRepository.setDataSource(dataSource);</span><br><span class="line">   <span class="comment">// jdbcTokenRepository.setCreateTableOnStartup(true) 自动创建数据库表</span></span><br><span class="line">    <span class="keyword">return</span> jdbcTokenRepository;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>3.</p>
-<p><img src="https://files.catbox.moe/z5yw7u.png" alt="第三步"></p>
-<ol start="4">
-<li>自动登录复选框</li>
-</ol>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;checkBox&quot;</span> <span class="attr">name</span>=<span class="string">&quot;remeber-me&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="CSRF"><a href="#CSRF" class="headerlink" title="CSRF"></a>CSRF</h2><p>跨站请求伪造</p>
-<p>form中加入以下语句</p>
-<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;hidden&quot;</span> <span class="attr">th:name</span>=<span class="string">&quot;$&#123;_csrf.parameterName&#125;$&quot;</span> <span class="attr">th:value</span>=<span class="string">&quot;$&#123;_csrf.token&#125;$&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p><img src="https://files.catbox.moe/khqx95.png"></p>
-<p><strong>csrfFilter.class</strong></p>
-<h2 id="微服务"><a href="#微服务" class="headerlink" title="微服务"></a>微服务</h2><ul>
-<li>微服务的每个模块都相当于一个单独的项目，代码量明显减少，遇到的问题也相对来说比较好解决</li>
-<li>微服务的每个模块可以使用不同的存储方式(redis/mysql/etc）数据库也是每个模块对应自己的数据库</li>
-<li>每个模块可以使用不同的开发技术、开发语言，开发模式更灵活</li>
-</ul>
-<p><img src="https://files.catbox.moe/4nbgiq.png"></p>
-<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><blockquote>
-<p><img src="https://files.catbox.moe/83ktop.png"><br><img src="https://files.catbox.moe/v5k1fs.png"><br><img src="https://files.catbox.moe/bnkrpw.png"><br><img src="https://files.catbox.moe/may13u.png"><br><img src="https://files.catbox.moe/2jaj6f.png"><br><img src="https://files.catbox.moe/wm0w0b.png"><br><img src="https://files.catbox.moe/syca4w.png"><br><img src="https://files.catbox.moe/b3wcly.png"><br><img src="https://files.catbox.moe/k0l3rs.png"><br><img src="https://files.catbox.moe/kyvfra.png"></p>
-</blockquote>
-<h2 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h2><p><img src="https://files.catbox.moe/3c4wus.png"></p>
-<h3 id="UsernamePasswordAuthenticationFilter"><a href="#UsernamePasswordAuthenticationFilter" class="headerlink" title="UsernamePasswordAuthenticationFilter"></a><code>UsernamePasswordAuthenticationFilter</code></h3><ul>
-<li><p>查询Filter父类<code>AbstractAuthenticationProcessingFilter</code>的<code>doFilter()</code></p>
-<ul>
-<li>判断提交方式是否是post提交</li>
-<li>调用子类的方法<code>attemptAuthentication(request,response)</code>进行身份验证<ul>
-<li>认证信息存入<code>Authentication</code>对象中</li>
-</ul>
-</li>
-<li>session策略处理</li>
-<li>认证失败抛出异常，执行认证失败的方法<code>unsuccessfulAuthentication()</code><ul>
-<li>认证成功执行认证成功的方法</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p><code>attemptAuthentication(request,response)</code></p>
-<ul>
-<li>判断是否是post提交，不是则抛出异常</li>
-<li>获取表单提交的数据</li>
-<li>使用获取数据，构造成对象，标记成未认证状态，把请求中的一些属性信息设置到对象里，调用方法进行身份认证(userDetailsService)</li>
-</ul>
-</li>
-<li><p><code>UsernamePasswordAuthencationToken</code>构建过程</p>
-<p><img src="https://files.catbox.moe/klxjx8.png"></p>
-</li>
-</ul>
-]]></content>
-      <tags>
-        <tag>Spring</tag>
       </tags>
   </entry>
   <entry>
@@ -1096,6 +911,191 @@ https://download.docker.com/linux/centos/docker-ce.repo
 ]]></content>
       <tags>
         <tag>Redis</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Spring Security</title>
+    <url>/2021/07/30/SpringSecurity/SpringSecurity/</url>
+    <content><![CDATA[<h1 id="SpringSecurity"><a href="#SpringSecurity" class="headerlink" title="SpringSecurity"></a>SpringSecurity</h1><p><a href="/https://blog.csdn.net/qq_40298902/article/details/106433192">CSDN实例</a></p>
+<h2 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h2><p>SpringSecurity本质是一个过滤器链</p>
+<span id="more"></span>
+<ul>
+<li><p>FilterSecurityInterceptor：方法级的权限过滤器，基本位于过滤链的最底部</p>
+</li>
+<li><p>ExceptionTranslationFilter:异常过滤器，用来处理再认证授权过程中抛出的异常</p>
+<ul>
+<li>这两个Filter通常是结合在一起用的，前者负责处理后者所抛出的异常并做相应的处理，后者主要用于鉴权。<code>ExceptionTranslationFilter</code>在处理异常时，如果异常为<code>AuthenticationException</code>类型，表示用户认证都失败了(比如还没有经过认证)，此时将调用<code>AuthenticationEntryPoint</code>开启认证过程，比如向用户展示登录页面；如果异常为<code>AccessDeniedException</code>，表示用户可能已经登录但是没有足够的权限，此时将调用<code>AccessDeniedHandler</code>，比如向用户展示“你没有权限”的通知页面。</li>
+</ul>
+</li>
+<li><p>UsernamePasswordAuthenticationFilter：对<code>/login</code>的POST请求做拦截，校验表单中用户名密码</p>
+<ul>
+<li>用于处理基于Form登录的认证，认证成功重定向到指定页面，认证失败向用户重新返回登录界面并提示错误。<code>UsernamePasswordAuthenticationFilter</code>继承自<code>AbstractAuthenticationProcessingFilter</code>，<code>AbstractAuthenticationProcessingFilter</code>可以配置一个<code>AuthenticationSuccessHandler</code>和一个<code>AuthenticationFailureHandler</code>，认证成功之后将调用<code>AuthenticationSuccessHandler</code>，比如像<code>UsernamePasswordAuthenticationFilter</code>一样重定向到某个页面，也可以根据自定义向用户返回一个JWT的Token；认证失败(比如用户名或密码不正确)后将调用<code>AuthenticationFailureHandler</code>，比如像<code>UsernamePasswordAuthenticationFilter</code>一样重新返回登录页面，也可以根据自定义向用户返回一个401状态码。</li>
+<li><code>AbstractAuthenticationProcessingFilter</code>并不完成认证逻辑，而是将其交给<code>AuthenticationManager</code>，<code>AuthenticationManager</code>进而代理给<code>AuthenticationProvider</code>，<code>AuthenticationProvider</code>验证用户提供的凭证是否正确(比如从数据库加载用户的密码然后与用户提供的密码对比，或者与LDAP服务器通信验证用户名和密码)。</li>
+</ul>
+</li>
+</ul>
+<h3 id="过滤器加载"><a href="#过滤器加载" class="headerlink" title="过滤器加载"></a>过滤器加载</h3><ol>
+<li>使用SpringSecurity配置过滤器<ol>
+<li>DelegatingFilterProxy</li>
+</ol>
+</li>
+</ol>
+<p><img src="https://files.catbox.moe/lay6v0.png" alt="Filter"></p>
+<h2 id="UserDetailsService接口"><a href="#UserDetailsService接口" class="headerlink" title="UserDetailsService接口"></a>UserDetailsService接口</h2><p>自定义账号密码逻辑，数据库？内存？ （redis?</p>
+<p>查询数据库用户名和密码的过程</p>
+<ul>
+<li>创建类继承UsernamePasswordAuthenticationFilter，重写其中三个方法<ul>
+<li>attemptAuthentication 判断用户名密码</li>
+<li>successfulAuthentication 成功</li>
+<li>unsuccessfulAuthentication 失败</li>
+</ul>
+</li>
+<li>创建类实现UserDetailsService接口，编写查询数据过程，返回User对象（User对象是安全框架提供的对象）</li>
+</ul>
+<h2 id="PasswordEncoder"><a href="#PasswordEncoder" class="headerlink" title="PasswordEncoder"></a>PasswordEncoder</h2><p>对密码加密接口</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">BCryptPasswordEncoder bCryptPasswordEncoder =<span class="keyword">new</span> BCryptPasswordEncoder();</span><br><span class="line">String pwd=bCryptPasswordEncoder.encode(<span class="string">&quot;password&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h2 id="web权限方案"><a href="#web权限方案" class="headerlink" title="web权限方案"></a>web权限方案</h2><p><strong>认证</strong>与<strong>授权</strong></p>
+<h3 id="设置登录用户名密码"><a href="#设置登录用户名密码" class="headerlink" title="设置登录用户名密码"></a>设置登录用户名密码</h3><ol>
+<li><p>配置文件</p>
+<p>application.properties中</p>
+<ol>
+<li>spring.security.user.name=</li>
+<li>spring.security.user.password=</li>
+</ol>
+</li>
+<li><p>配置类</p>
+<ol>
+<li>@Configuration</li>
+<li>extends WebSecurityConfigurerAdapter</li>
+<li><img src="https://files.catbox.moe/6zo8c1.png"></li>
+</ol>
+</li>
+<li><p>自定义实现类UserDetailsService</p>
+<ol>
+<li>创建配置类，设置使用哪个userDetailsService实现类<ol>
+<li><img src="https://files.catbox.moe/ej0nnn.png"></li>
+</ol>
+</li>
+<li>编写实现类，返回User对象，User对象有用户名密码和操作<ol>
+<li><img src="https://files.catbox.moe/rrcq8k.png"></li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h3 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h3><ol>
+<li>引入依赖</li>
+<li>创建数据库</li>
+<li>创建实体类Users</li>
+<li>创建mapper接口,<code>interface UserMapper</code> ,增删改查函数</li>
+<li>mapper.xml文件对应接口的增删改查 (使用MyBatis-Plus可简化45，接口继承BaseMapper&lt;Users&gt;)</li>
+<li>在UserDetailsService的自定义实现类中调用mapper中的方法查询数据库对用户的认证信息（根据username查询）</li>
+<li>在启动类中添加@MapperScan(“Mapper所在包”)注释</li>
+<li>配置文件中配置数据库信息<ol>
+<li><img src="https://files.catbox.moe/whr6u5.png"></li>
+<li>springBoot2默认使用Mysql8;driver-class-name加cj;设置时区</li>
+</ol>
+</li>
+</ol>
+<h2 id="配置类configure设置"><a href="#配置类configure设置" class="headerlink" title="配置类configure设置"></a>配置类configure设置</h2><p>自定义登录页面、403页面等</p>
+<p><img src="https://files.catbox.moe/j63v8t.png" alt="config"></p>
+<p><img src="https://files.catbox.moe/cjkuom.png" alt="403"></p>
+<h2 id="基于角色和权限实现访问控制"><a href="#基于角色和权限实现访问控制" class="headerlink" title="基于角色和权限实现访问控制"></a>基于角色和权限实现访问控制</h2><h3 id="1-hasAuthority"><a href="#1-hasAuthority" class="headerlink" title="1. hasAuthority"></a>1. hasAuthority</h3><p>如果当前主体具有指定的权限，有则返回true，否则false</p>
+<p><img src="https://files.catbox.moe/jeqjyj.png" alt="hasAuthority"></p>
+<h3 id="2-hasAnyAuthority"><a href="#2-hasAnyAuthority" class="headerlink" title="2. hasAnyAuthority"></a>2. hasAnyAuthority</h3><p><img src="https://files.catbox.moe/bzvoxj.png"></p>
+<h3 id="3-hasRole"><a href="#3-hasRole" class="headerlink" title="3. hasRole"></a>3. hasRole</h3><p>底层代码中将role改为了ROLE_#{role}</p>
+<p><img src="https://files.catbox.moe/zoontv.png"></p>
+<h3 id="4-hasAnyRole"><a href="#4-hasAnyRole" class="headerlink" title="4. hasAnyRole"></a>4. hasAnyRole</h3><p>同上</p>
+<h2 id="注解使用"><a href="#注解使用" class="headerlink" title="注解使用"></a>注解使用</h2><h3 id="Secured"><a href="#Secured" class="headerlink" title="@Secured"></a>@Secured</h3><p>判断用户是否具有角色（其中匹配的字符串需要加上前缀”ROLE_”)</p>
+<p>开启注解功能<code>@EnableGlobalMethodSecurity(securedEnable=true)</code></p>
+<p>在控制器方法上放添加<code>@Secured(&#123;&quot;ROLE_normal&quot;,&quot;ROLE_admin&quot;&#125;)</code></p>
+<p><img src="https://files.catbox.moe/0av96c.png"></p>
+<h3 id="PreAuthorize"><a href="#PreAuthorize" class="headerlink" title="@PreAuthorize"></a>@PreAuthorize</h3><p>在进入方法前进行权限验证</p>
+<p><code>@PreAuthorize(&quot;hasAnyAuthority(&#39;admins&#39;)&quot;)</code>四个方法都可以填在( )里面</p>
+<p>开启注解功能<code>@EnableGlobalMethodSecurity(prePostEnabled=true)</code></p>
+<p><img src="https://files.catbox.moe/do2cpo.png"></p>
+<h3 id="PostAuthorize"><a href="#PostAuthorize" class="headerlink" title="@PostAuthorize"></a>@PostAuthorize</h3><p>方法执行之后进行权限验证，多用于返回值</p>
+<p>开启注解功能<code>@EnableGlobalMethodSecurity(prePostEnabled=true)</code></p>
+<p><code>@PostAuthorize(&quot;hasAnyAuthority(&#39;admins&#39;)&quot;)</code>四个方法都可以填在( )里面</p>
+<p><img src="https://files.catbox.moe/zh6p22.png"></p>
+<p>test:</p>
+<p><img src="https://files.catbox.moe/mntx2c.png"></p>
+<p>↑有输出但跳转到403页面</p>
+<h3 id="PostFilter"><a href="#PostFilter" class="headerlink" title="@PostFilter"></a>@PostFilter</h3><p>不常用</p>
+<p>对返回数据进行过滤</p>
+<p><img src="https://files.catbox.moe/f4cqge.png"></p>
+<h3 id="PreFilter"><a href="#PreFilter" class="headerlink" title="@PreFilter"></a>@PreFilter</h3><p>不常用</p>
+<p>对传入方法的数据进行过滤</p>
+<p><img src="https://files.catbox.moe/urcoyc.png"></p>
+<h2 id="用户注销"><a href="#用户注销" class="headerlink" title="用户注销"></a>用户注销</h2><p>配置类中添加退出配置</p>
+<p><code>http.logout().logoutUrl(&quot;/logout&quot;).logoutSuccessUrl(&quot;/index&quot;).permitAll()</code></p>
+<p>退出超链接：</p>
+<p><code>&lt;a href=&quot;/logout&quot;&gt;注销&lt;/a&gt;</code></p>
+<h2 id="基于数据库实现自动登录"><a href="#基于数据库实现自动登录" class="headerlink" title="基于数据库实现自动登录"></a>基于数据库实现自动登录</h2><p>“自动登录”“十天内免登陆”….</p>
+<ul>
+<li>cookie技术</li>
+<li>安全框架实现</li>
+</ul>
+<h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p><img src="https://files.catbox.moe/ddagu1.png" alt="步骤"></p>
+<h3 id="具体实现"><a href="#具体实现" class="headerlink" title="具体实现"></a>具体实现</h3><ol>
+<li>创建数据库 <code>JdbcTokenRepositoryImpl</code>中有建表sql语句</li>
+<li>修改配置类：注入数据源，配置操作数据库对象</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Autowired</span></span><br><span class="line"><span class="keyword">private</span> DataSource dataSource;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Bean</span> <span class="function"><span class="keyword">public</span> PersistenTokenRepository <span class="title">persistenTokenRepository</span><span class="params">()</span></span>&#123;</span><br><span class="line">    JdbcTokenRepositoryImpl jdbcTokenRepository=<span class="keyword">new</span> JdbcTokenRepositoryImpl(); </span><br><span class="line">    jdbcTokenRepository.setDataSource(dataSource);</span><br><span class="line">   <span class="comment">// jdbcTokenRepository.setCreateTableOnStartup(true) 自动创建数据库表</span></span><br><span class="line">    <span class="keyword">return</span> jdbcTokenRepository;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>3.</p>
+<p><img src="https://files.catbox.moe/z5yw7u.png" alt="第三步"></p>
+<ol start="4">
+<li>自动登录复选框</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;checkBox&quot;</span> <span class="attr">name</span>=<span class="string">&quot;remeber-me&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="CSRF"><a href="#CSRF" class="headerlink" title="CSRF"></a>CSRF</h2><p>跨站请求伪造</p>
+<p>form中加入以下语句</p>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;hidden&quot;</span> <span class="attr">th:name</span>=<span class="string">&quot;$&#123;_csrf.parameterName&#125;$&quot;</span> <span class="attr">th:value</span>=<span class="string">&quot;$&#123;_csrf.token&#125;$&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://files.catbox.moe/khqx95.png"></p>
+<p><strong>csrfFilter.class</strong></p>
+<h2 id="微服务"><a href="#微服务" class="headerlink" title="微服务"></a>微服务</h2><ul>
+<li>微服务的每个模块都相当于一个单独的项目，代码量明显减少，遇到的问题也相对来说比较好解决</li>
+<li>微服务的每个模块可以使用不同的存储方式(redis/mysql/etc）数据库也是每个模块对应自己的数据库</li>
+<li>每个模块可以使用不同的开发技术、开发语言，开发模式更灵活</li>
+</ul>
+<p><img src="https://files.catbox.moe/4nbgiq.png"></p>
+<h3 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h3><blockquote>
+<p><img src="https://files.catbox.moe/83ktop.png"><br><img src="https://files.catbox.moe/v5k1fs.png"><br><img src="https://files.catbox.moe/bnkrpw.png"><br><img src="https://files.catbox.moe/may13u.png"><br><img src="https://files.catbox.moe/2jaj6f.png"><br><img src="https://files.catbox.moe/wm0w0b.png"><br><img src="https://files.catbox.moe/syca4w.png"><br><img src="https://files.catbox.moe/b3wcly.png"><br><img src="https://files.catbox.moe/k0l3rs.png"><br><img src="https://files.catbox.moe/kyvfra.png"></p>
+</blockquote>
+<h2 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h2><p><img src="https://files.catbox.moe/3c4wus.png"></p>
+<h3 id="UsernamePasswordAuthenticationFilter"><a href="#UsernamePasswordAuthenticationFilter" class="headerlink" title="UsernamePasswordAuthenticationFilter"></a><code>UsernamePasswordAuthenticationFilter</code></h3><ul>
+<li><p>查询Filter父类<code>AbstractAuthenticationProcessingFilter</code>的<code>doFilter()</code></p>
+<ul>
+<li>判断提交方式是否是post提交</li>
+<li>调用子类的方法<code>attemptAuthentication(request,response)</code>进行身份验证<ul>
+<li>认证信息存入<code>Authentication</code>对象中</li>
+</ul>
+</li>
+<li>session策略处理</li>
+<li>认证失败抛出异常，执行认证失败的方法<code>unsuccessfulAuthentication()</code><ul>
+<li>认证成功执行认证成功的方法</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><code>attemptAuthentication(request,response)</code></p>
+<ul>
+<li>判断是否是post提交，不是则抛出异常</li>
+<li>获取表单提交的数据</li>
+<li>使用获取数据，构造成对象，标记成未认证状态，把请求中的一些属性信息设置到对象里，调用方法进行身份认证(userDetailsService)</li>
+</ul>
+</li>
+<li><p><code>UsernamePasswordAuthencationToken</code>构建过程</p>
+<p><img src="https://files.catbox.moe/klxjx8.png"></p>
+</li>
+</ul>
+]]></content>
+      <tags>
+        <tag>Spring</tag>
       </tags>
   </entry>
 </search>
