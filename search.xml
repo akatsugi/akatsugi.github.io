@@ -1,8 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Hello World,Hexo</title>
+    <url>/2020/11/16/Hexo/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
+      <tags>
+        <tag>其他</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>个人博客搭建</title>
-    <url>/2021/11/07/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/</url>
+    <url>/2021/11/01/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/</url>
     <content><![CDATA[<h1 id="安装Nodejs"><a href="#安装Nodejs" class="headerlink" title="安装Nodejs"></a>安装Nodejs</h1><p>node -v    #查看node版本<br>npm -v    #查看npm版本<br>npm install -g cnpm –registry=<a href="http://registry.npm.taobao.org/">http://registry.npm.taobao.org</a>    #安装淘宝的cnpm 管理器<br>cnpm -v    #查看cnpm版本<br>cnpm install -g hexo-cli    #安装hexo框架<br>hexo -v    #查看hexo版本</p>
 <span id="more"></span>
 
@@ -21,7 +42,7 @@
   </entry>
   <entry>
     <title>自定义注解</title>
-    <url>/2021/11/07/%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B3%A8%E8%A7%A3/</url>
+    <url>/2021/08/03/%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B3%A8%E8%A7%A3/</url>
     <content><![CDATA[<h2 id="注解类"><a href="#注解类" class="headerlink" title="注解类"></a>注解类</h2><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Target(ElementType.METHOD)</span> <span class="comment">//作用于方法</span></span><br><span class="line"><span class="meta">@Retention(RetentionPolicy.RUNTIME)</span> <span class="comment">// 运行时有效</span></span><br><span class="line"><span class="meta">@Documented</span> <span class="comment">//被 javadoc工具记录</span></span><br><span class="line"><span class="meta">@Inherited</span> <span class="comment">//可继承</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> BatchQuery &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <span id="more"></span>
 <h2 id="自定义注解"><a href="#自定义注解" class="headerlink" title="自定义注解"></a>自定义注解</h2><p><code>@interface</code></p>
@@ -46,7 +67,7 @@
   </entry>
   <entry>
     <title>个人服务器搭建</title>
-    <url>/2021/11/09/%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA/</url>
+    <url>/2021/11/10/%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA/</url>
     <content><![CDATA[<h2 id="阿里云购买服务器"><a href="#阿里云购买服务器" class="headerlink" title="阿里云购买服务器"></a>阿里云购买服务器</h2><h2 id="安全组设置"><a href="#安全组设置" class="headerlink" title="安全组设置"></a>安全组设置</h2><p>Linux防火墙的端口开完后，一定还需要在阿里云设置安全组规则，开放端口号，否则外部无法访问<br><img src="https://files.catbox.moe/sa3bbm.png"></p>
 <h2 id="远程登录"><a href="#远程登录" class="headerlink" title="远程登录"></a>远程登录</h2><span id="more"></span>
 
@@ -143,27 +164,6 @@ https://download.docker.com/linux/centos/docker-ce.repo
 ]]></content>
       <tags>
         <tag>实践</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Hello World,Hexo</title>
-    <url>/2021/11/07/Hexo/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<span id="more"></span>
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-]]></content>
-      <tags>
-        <tag>其他</tag>
       </tags>
   </entry>
   <entry>
@@ -650,7 +650,7 @@ https://download.docker.com/linux/centos/docker-ce.repo
   </entry>
   <entry>
     <title>Dubbo</title>
-    <url>/2021/11/07/Dubbo/dubbo/</url>
+    <url>/2021/08/16/Dubbo/dubbo/</url>
     <content><![CDATA[<h1 id="Dubbo"><a href="#Dubbo" class="headerlink" title="Dubbo"></a>Dubbo</h1><h2 id="设计架构"><a href="#设计架构" class="headerlink" title="设计架构"></a>设计架构</h2><p><img src="https://files.catbox.moe/mnthc8.png" alt="设计架构"></p>
 <p>基本流程：</p>
 <ol>
@@ -784,7 +784,7 @@ https://download.docker.com/linux/centos/docker-ce.repo
   </entry>
   <entry>
     <title>Redis</title>
-    <url>/2021/11/07/Redis/redis/</url>
+    <url>/2021/07/16/Redis/redis/</url>
     <content><![CDATA[<h1 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h1><h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><h3 id="STRING"><a href="#STRING" class="headerlink" title="STRING"></a>STRING</h3><p>二进制安全，可以包含任何数据</p>
 <p>大小上下512M</p>
 <h3 id="LIST"><a href="#LIST" class="headerlink" title="LIST"></a>LIST</h3><span id="more"></span>
@@ -915,7 +915,7 @@ https://download.docker.com/linux/centos/docker-ce.repo
   </entry>
   <entry>
     <title>Spring Security</title>
-    <url>/2021/11/07/SpringSecurity/SpringSecurity/</url>
+    <url>/2021/07/30/SpringSecurity/SpringSecurity/</url>
     <content><![CDATA[<h1 id="SpringSecurity"><a href="#SpringSecurity" class="headerlink" title="SpringSecurity"></a>SpringSecurity</h1><p><a href="/https://blog.csdn.net/qq_40298902/article/details/106433192">CSDN实例</a></p>
 <h2 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h2><p>SpringSecurity本质是一个过滤器链</p>
 <span id="more"></span>

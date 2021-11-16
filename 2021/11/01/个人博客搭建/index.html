@@ -20,28 +20,28 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"akatsugi.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.8.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
-<meta name="description" content="注解类123456@Target(ElementType.METHOD) &#x2F;&#x2F;作用于方法@Retention(RetentionPolicy.RUNTIME) &#x2F;&#x2F; 运行时有效@Documented &#x2F;&#x2F;被 javadoc工具记录@Inherited &#x2F;&#x2F;可继承public @interface BatchQuery &amp;#123;&amp;#125;">
+<meta name="description" content="安装Nodejsnode -v    #查看node版本npm -v    #查看npm版本npm install -g cnpm –registry&#x3D;http:&#x2F;&#x2F;registry.npm.taobao.org    #安装淘宝的cnpm 管理器cnpm -v    #查看cnpm版本cnpm install -g hexo-cli    #安装hexo框架hexo -v    #查看hexo版">
 <meta property="og:type" content="article">
-<meta property="og:title" content="自定义注解">
-<meta property="og:url" content="https://akatsugi.github.io/2021/11/07/%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B3%A8%E8%A7%A3/index.html">
+<meta property="og:title" content="个人博客搭建">
+<meta property="og:url" content="https://akatsugi.github.io/2021/11/01/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/index.html">
 <meta property="og:site_name" content="akatsugi">
-<meta property="og:description" content="注解类123456@Target(ElementType.METHOD) &#x2F;&#x2F;作用于方法@Retention(RetentionPolicy.RUNTIME) &#x2F;&#x2F; 运行时有效@Documented &#x2F;&#x2F;被 javadoc工具记录@Inherited &#x2F;&#x2F;可继承public @interface BatchQuery &amp;#123;&amp;#125;">
+<meta property="og:description" content="安装Nodejsnode -v    #查看node版本npm -v    #查看npm版本npm install -g cnpm –registry&#x3D;http:&#x2F;&#x2F;registry.npm.taobao.org    #安装淘宝的cnpm 管理器cnpm -v    #查看cnpm版本cnpm install -g hexo-cli    #安装hexo框架hexo -v    #查看hexo版">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-11-07T11:19:53.909Z">
-<meta property="article:modified_time" content="2021-11-07T13:35:30.601Z">
+<meta property="article:published_time" content="2021-11-01T10:30:38.000Z">
+<meta property="article:modified_time" content="2021-11-16T10:32:33.989Z">
 <meta property="article:author" content="akatsugi">
-<meta property="article:tag" content="其他">
+<meta property="article:tag" content="实践">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://akatsugi.github.io/2021/11/07/%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B3%A8%E8%A7%A3/">
+<link rel="canonical" href="https://akatsugi.github.io/2021/11/01/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://akatsugi.github.io/2021/11/07/%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B3%A8%E8%A7%A3/","path":"2021/11/07/自定义注解/","title":"自定义注解"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://akatsugi.github.io/2021/11/01/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/","path":"2021/11/01/个人博客搭建/","title":"个人博客搭建"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>自定义注解 | akatsugi</title>
+<title>个人博客搭建 | akatsugi</title>
   
 
 
@@ -146,7 +146,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B3%A8%E8%A7%A3%E7%B1%BB"><span class="nav-number">1.</span> <span class="nav-text">注解类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B3%A8%E8%A7%A3"><span class="nav-number">2.</span> <span class="nav-text">自定义注解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pointcut%E6%B3%A8%E8%A7%A3"><span class="nav-number">3.</span> <span class="nav-text">@pointcut注解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Around%E6%B3%A8%E8%A7%A3"><span class="nav-number">4.</span> <span class="nav-text">@Around注解</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85Nodejs"><span class="nav-number">1.</span> <span class="nav-text">安装Nodejs</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BF%94%E5%9B%9Eblog%E7%9B%AE%E5%BD%95"><span class="nav-number">2.</span> <span class="nav-text">返回blog目录</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Github%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E6%96%B0%E7%9A%84%E4%BB%93%E5%BA%93-YourGithubName-github-io"><span class="nav-number">3.</span> <span class="nav-text">Github创建一个新的仓库 YourGithubName.github.io</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#cnpm-install-%E2%80%93save-hexo-deployer-git-%E5%9C%A8blog%E7%9B%AE%E5%BD%95%E4%B8%8B%E5%AE%89%E8%A3%85git%E9%83%A8%E7%BD%B2%E6%8F%92%E4%BB%B6"><span class="nav-number">3.1.</span> <span class="nav-text">cnpm install –save hexo-deployer-git #在blog目录下安装git部署插件</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE-config-yml"><span class="nav-number">4.</span> <span class="nav-text">配置_config.yml</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Deployment"><span class="nav-number">5.</span> <span class="nav-text">Deployment</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Docs-https-hexo-io-docs-deployment-html"><span class="nav-number">5.1.</span> <span class="nav-text">Docs: https:&#x2F;&#x2F;hexo.io&#x2F;docs&#x2F;deployment.html</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9hexo%E6%A0%B9%E7%9B%AE%E5%BD%95%E4%B8%8B%E7%9A%84-config-yml-%E6%96%87%E4%BB%B6-%EF%BC%9A-theme-yilia"><span class="nav-number">6.</span> <span class="nav-text">修改hexo根目录下的 _config.yml 文件 ： theme: yilia</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E5%8D%9A%E5%AE%A2"><span class="nav-number">7.</span> <span class="nav-text">查看博客</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -209,7 +209,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://akatsugi.github.io/2021/11/07/%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B3%A8%E8%A7%A3/">
+    <link itemprop="mainEntityOfPage" href="https://akatsugi.github.io/2021/11/01/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/headImg.jpg">
@@ -222,7 +222,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          自定义注解
+          个人博客搭建
         </h1>
 
         <div class="post-meta-container">
@@ -232,10 +232,16 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2021-11-07 19:19:53 / 修改时间：21:35:30" itemprop="dateCreated datePublished" datetime="2021-11-07T19:19:53+08:00">2021-11-07</time>
+      <time title="创建时间：2021-11-01 18:30:38" itemprop="dateCreated datePublished" datetime="2021-11-01T18:30:38+08:00">2021-11-01</time>
     </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">更新于</span>
+        <time title="修改时间：2021-11-16 18:32:33" itemprop="dateModified" datetime="2021-11-16T18:32:33+08:00">2021-11-16</time>
+      </span>
 
   
 </div>
@@ -247,24 +253,18 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h2 id="注解类"><a href="#注解类" class="headerlink" title="注解类"></a>注解类</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Target(ElementType.METHOD)</span> <span class="comment">//作用于方法</span></span><br><span class="line"><span class="meta">@Retention(RetentionPolicy.RUNTIME)</span> <span class="comment">// 运行时有效</span></span><br><span class="line"><span class="meta">@Documented</span> <span class="comment">//被 javadoc工具记录</span></span><br><span class="line"><span class="meta">@Inherited</span> <span class="comment">//可继承</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> BatchQuery &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <h1 id="安装Nodejs"><a href="#安装Nodejs" class="headerlink" title="安装Nodejs"></a>安装Nodejs</h1><p>node -v    #查看node版本<br>npm -v    #查看npm版本<br>npm install -g cnpm –registry=<a target="_blank" rel="noopener" href="http://registry.npm.taobao.org/">http://registry.npm.taobao.org</a>    #安装淘宝的cnpm 管理器<br>cnpm -v    #查看cnpm版本<br>cnpm install -g hexo-cli    #安装hexo框架<br>hexo -v    #查看hexo版本</p>
 <span id="more"></span>
-<h2 id="自定义注解"><a href="#自定义注解" class="headerlink" title="自定义注解"></a>自定义注解</h2><p><code>@interface</code></p>
-<p>在底层实现上，所有定义的注解都会自动继承java.lang.annotation.Annotation接口</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Aspect</span> <span class="comment">//标注增强处理类（切面类）</span></span><br><span class="line"><span class="meta">@Component</span> <span class="comment">//交由Spring容器管理</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> CherryAnnotation &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="pointcut注解"><a href="#pointcut注解" class="headerlink" title="@pointcut注解"></a><code>@pointcut</code>注解</h2><p>Pointcut(切入点)： JoinPoint的集合，是程序中需要注入Advice的位置的集合，指明Advice要在什么样的条件下才能被触发，在程序中主要体现为书写切入点表达式。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Pointcut(&quot;@annotation(com.ztesoft.zsmart.pot.annotation.BatchQuery)&quot;)</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="Around注解"><a href="#Around注解" class="headerlink" title="@Around注解"></a><code>@Around</code>注解</h2><p>@Around注解：可以用来在调用一个具体方法前和调用后来完成一些具体的任务。</p>
-<p>=<code>@Before</code>+<code>@After</code></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Around(&quot;pointcut()&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Object <span class="title">around</span><span class="params">(ProceedingJoinPoint joinPoint)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">        ....</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<p>也可以不使用<code>@pointcut</code></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//调用controller包下的任意类的任意方法时均会调用此方法</span></span><br><span class="line"><span class="meta">@Around(&quot;execution(* com.company.controller.*.*(..))&quot;)</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> Object <span class="title">run1</span><span class="params">(ProceedingJoinPoint joinPoint)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">  <span class="comment">//获取方法参数值数组</span></span><br><span class="line">  Object[] args = joinPoint.getArgs();</span><br><span class="line">  <span class="comment">//得到其方法签名</span></span><br><span class="line">  MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();</span><br><span class="line">  <span class="comment">//获取方法参数类型数组</span></span><br><span class="line">  Class[] paramTypeArray = methodSignature.getParameterTypes();</span><br><span class="line">  .......</span><br><span class="line">  logger.info(<span class="string">&quot;请求参数为&#123;&#125;&quot;</span>,args);</span><br><span class="line">  <span class="comment">//动态修改其参数</span></span><br><span class="line">  <span class="comment">//注意，如果调用joinPoint.proceed()方法，则修改的参数值不会生效，必须调用joinPoint.proceed(Object[] args)</span></span><br><span class="line">  Object result = joinPoint.proceed(args);</span><br><span class="line">  logger.info(<span class="string">&quot;响应结果为&#123;&#125;&quot;</span>,result);</span><br><span class="line">   <span class="comment">//如果这里不返回result，则目标对象实际返回值会被置为null</span></span><br><span class="line">  <span class="keyword">return</span> result;   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>如果我们还想利用其进行参数的修改，则调用时必须用joinPoint.proceed(Object[] args)方法，将修改后的参数进行回传。如果用joinPoint.proceed()方法，则修改后的参数并不会真正被使用。</strong></p>
-
+<p>mkdir blog    #创建blog目录<br>cd blog     #进入blog目录<br>sudo hexo init     #生成博客 初始化博客<br>hexo s    #启动本地博客服务<br><a target="_blank" rel="noopener" href="http://localhost:4000/">http://localhost:4000/</a>    #本地访问地址<br>hexo n 我的第一篇文章 #创建新的文章</p>
+<h1 id="返回blog目录"><a href="#返回blog目录" class="headerlink" title="返回blog目录"></a>返回blog目录</h1><p>hexo clean #清理<br>hexo g #生成</p>
+<h1 id="Github创建一个新的仓库-YourGithubName-github-io"><a href="#Github创建一个新的仓库-YourGithubName-github-io" class="headerlink" title="Github创建一个新的仓库 YourGithubName.github.io"></a>Github创建一个新的仓库 YourGithubName.github.io</h1><h2 id="cnpm-install-–save-hexo-deployer-git-在blog目录下安装git部署插件"><a href="#cnpm-install-–save-hexo-deployer-git-在blog目录下安装git部署插件" class="headerlink" title="cnpm install –save hexo-deployer-git #在blog目录下安装git部署插件"></a>cnpm install –save hexo-deployer-git #在blog目录下安装git部署插件</h2><h1 id="配置-config-yml"><a href="#配置-config-yml" class="headerlink" title="配置_config.yml"></a>配置_config.yml</h1><hr>
+<h1 id="Deployment"><a href="#Deployment" class="headerlink" title="Deployment"></a>Deployment</h1><h2 id="Docs-https-hexo-io-docs-deployment-html"><a href="#Docs-https-hexo-io-docs-deployment-html" class="headerlink" title="Docs: https://hexo.io/docs/deployment.html"></a>Docs: <a target="_blank" rel="noopener" href="https://hexo.io/docs/deployment.html">https://hexo.io/docs/deployment.html</a></h2><p>deploy:<br>type: git<br>repo: <a target="_blank" rel="noopener" href="https://github.com/YourGithubName/YourGithubName.github.io.git">https://github.com/YourGithubName/YourGithubName.github.io.git</a><br>branch: master</p>
+<hr>
+<p>hexo d    #部署到Github仓库里<br><a target="_blank" rel="noopener" href="https://yourgithubname.github.io/">https://YourGithubName.github.io/</a>  #访问这个地址可以查看博客</p>
+<p>git clone <a target="_blank" rel="noopener" href="https://github.com/litten/hexo-theme-yilia.git">https://github.com/litten/hexo-theme-yilia.git</a> themes/yilia  #下载yilia主题到本地</p>
+<h1 id="修改hexo根目录下的-config-yml-文件-：-theme-yilia"><a href="#修改hexo根目录下的-config-yml-文件-：-theme-yilia" class="headerlink" title="修改hexo根目录下的 _config.yml 文件 ： theme: yilia"></a>修改hexo根目录下的 _config.yml 文件 ： theme: yilia</h1><p>hexo c    #清理一下<br>hexo g    #生成<br>hexo d    #部署到远程Github仓库<br><a target="_blank" rel="noopener" href="https://yourgithubname.github.io/">https://YourGithubName.github.io/</a></p>
+<h1 id="查看博客"><a href="#查看博客" class="headerlink" title="查看博客"></a>查看博客</h1>
     </div>
 
     
@@ -281,7 +281,7 @@
   </li>
   <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="https://akatsugi.github.io/2021/11/07/%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B3%A8%E8%A7%A3/" title="自定义注解">https://akatsugi.github.io/2021/11/07/自定义注解/</a>
+      <a href="https://akatsugi.github.io/2021/11/01/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" title="个人博客搭建">https://akatsugi.github.io/2021/11/01/个人博客搭建/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/zh-CN" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -290,20 +290,20 @@
 </div>
 
           <div class="post-tags">
-              <a href="/tags/%E5%85%B6%E4%BB%96/" rel="tag"># 其他</a>
+              <a href="/tags/%E5%AE%9E%E8%B7%B5/" rel="tag"># 实践</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2021/11/07/%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" rel="prev" title="个人博客搭建">
-                  <i class="fa fa-chevron-left"></i> 个人博客搭建
+                <a href="/2021/08/16/Dubbo/dubbo/" rel="prev" title="Dubbo">
+                  <i class="fa fa-chevron-left"></i> Dubbo
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2021/11/07/Dubbo/dubbo/" rel="next" title="Dubbo">
-                  Dubbo <i class="fa fa-chevron-right"></i>
+                <a href="/2021/11/10/%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA/" rel="next" title="个人服务器搭建">
+                  个人服务器搭建 <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>
