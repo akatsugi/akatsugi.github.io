@@ -246,119 +246,14 @@
 <blockquote>
 <p>其特点是占有内存少，并发能力强，能够支持高达5w个并发连接数的响应</p>
 </blockquote>
-<h2 id="正向代理和反向代理"><a href="#正向代理和反向代理" class="headerlink" title="正向代理和反向代理"></a>正向代理和反向代理</h2><p>正向代理：例：客户端-&gt;VPN服务器-&gt;服务器-&gt;VPN服务器-&gt;客户端 传递，对客户端的代理</p>
-<p><img src="https://files.catbox.moe/ogjmfj.png"></p>
-<p>反向代理</p>
-<p><img src="https://files.catbox.moe/np4tda.png"></p>
-<h2 id="负载均衡策略"><a href="#负载均衡策略" class="headerlink" title="负载均衡策略"></a>负载均衡策略</h2><p>Nginx提供的负载均衡策略有两种：<strong>内置策略和扩展策略</strong></p>
-<p>内置策略为轮询，加权轮询，Ip hash</p>
-<p>扩展策略很多种。</p>
-<p>轮询</p>
-<p><img src="https://files.catbox.moe/pgo7fo.png"></p>
-<p>加权轮询</p>
-<p><img src="https://files.catbox.moe/9uaz2x.png"></p>
-<p>IP hash 是对客户端请求的IP进行hash操作，根据hash的结果将同一客户端ip的请求都分发到同一台服务器进行处理，从而解决session不共享的问题（实际会使用Redis做Session共享）</p>
-<p><img src="https://files.catbox.moe/scrkgm.png"></p>
-<h2 id="动静分离"><a href="#动静分离" class="headerlink" title="动静分离"></a>动静分离</h2><p>动静分离，在我们的软件开发中，有些请求是需要后台处理的，有些请求是不需要经过后台处理的（如：css、html、jpg、js等等文件），这些不需要经过后台处理的文件称为静态文件。让动态网站里的动态网页根据一定规则把不变的资源和经常变的资源区分开来，动静资源做好了拆分以后，我们就可以根据静态资源的特点将其做缓存操作。<strong>提高资源响应的速度</strong>。</p>
-<blockquote>
-<p>两种实现</p>
-<ul>
-<li>一种为把静态文件独立成单独的域名，放在单独的服务器上（主流）</li>
-<li>动态与静态一起发布，通过Nginx来分开</li>
-<li><img src="https://files.catbox.moe/lcwyqg.png"></li>
-</ul>
-</blockquote>
-<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /usr/<span class="built_in">local</span>/nginx/sbin/</span><br><span class="line">./nginx  启动</span><br><span class="line">./nginx -s stop  强制停止</span><br><span class="line">./nginx -s quit  安全退出</span><br><span class="line">./nginx -s reload  重新加载配置文件</span><br><span class="line">./nginx -v        查看版本号</span><br><span class="line">ps aux|grep nginx  查看nginx进程</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://files.catbox.moe/29wjsz.png"></p>
-<h2 id="Nginx配置文件"><a href="#Nginx配置文件" class="headerlink" title="Nginx配置文件"></a>Nginx配置文件</h2><p><img src="https://files.catbox.moe/ymss9i.png"></p>
-<p>Nginx配置文件由三部分组成：</p>
-<ul>
-<li>全局块</li>
-<li>events块</li>
-<li>http块</li>
-</ul>
-<h3 id="全局块"><a href="#全局块" class="headerlink" title="全局块"></a>全局块</h3><p>从配置文件开始到events块之间的内容，主要设置一些影响Nginx服务器整体运行的配置指令</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#user  nobody;</span></span><br><span class="line">worker_processes  1;                   <span class="comment"># Nginx服务器处理并发服务的关键配置，值越大，可以支持的并发处理量越多，但会受到硬件软件的制约</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#error_log  logs/error.log;</span></span><br><span class="line"><span class="comment">#error_log  logs/error.log  notice;</span></span><br><span class="line"><span class="comment">#error_log  logs/error.log  info;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#pid        logs/nginx.pid;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h3 id="events"><a href="#events" class="headerlink" title="events"></a>events</h3><p><strong>主要影响Nginx服务器与用户的网络连接</strong>，常用的设置包括是否开启多work process下的网络连接进行序列号，是否允许同时接收多个网络连接，选取哪种事件驱动模型来处理连接请求，每个word process可以同时支持的最大连接数等</p>
-<p><strong>这部分对Nginx的性能影响较大，应灵活配置</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">events &#123;</span><br><span class="line">    worker_connections  1024;  <span class="comment"># 表示每个work process支持的最大连接数位1024</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="HTTP快"><a href="#HTTP快" class="headerlink" title="HTTP快"></a>HTTP快</h3><p><strong>配置最频繁的部分</strong></p>
-<p>其中包括<strong>http全局块和server块</strong></p>
-<h4 id="http全局块"><a href="#http全局块" class="headerlink" title="http全局块"></a>http全局块</h4><p>包括文件引入，MIME-TYPE定义，日志自定义，连接超时时间，单链接请求数上限等</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">http &#123;</span><br><span class="line">    include       mime.types;</span><br><span class="line">    default_type  application/octet-stream;</span><br><span class="line"></span><br><span class="line">    <span class="comment">#log_format  main  &#x27;$remote_addr - $remote_user [$time_local] &quot;$request&quot; &#x27;</span></span><br><span class="line">    <span class="comment">#                  &#x27;$status $body_bytes_sent &quot;$http_referer&quot; &#x27;</span></span><br><span class="line">    <span class="comment">#                  &#x27;&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;&#x27;;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">#access_log  logs/access.log  main;</span></span><br><span class="line"></span><br><span class="line">    sendfile        on;</span><br><span class="line">    <span class="comment">#tcp_nopush     on;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">#keepalive_timeout  0;</span></span><br><span class="line">    keepalive_timeout  65;</span><br><span class="line"></span><br><span class="line">    <span class="comment">#gzip  on;</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="server块"><a href="#server块" class="headerlink" title="server块"></a>server块</h4><p><strong>此处与虚拟主机有密切关系</strong>，虚拟主机从用户角度看，和一台独立的硬件主机是完全一样的</p>
-<p>每个http块可以包括多个server块，而每个server块就相当于一个虚拟主机</p>
-<p>每个server块也分为<strong>server全局块和一个或多个的location块</strong></p>
-<h5 id="server全局块"><a href="#server全局块" class="headerlink" title="server全局块"></a>server全局块</h5><p>最常见的配置是本虚拟机主机的监听配置和本虚拟主机的名称或IP配置</p>
-<h5 id="location块"><a href="#location块" class="headerlink" title="location块"></a>location块</h5><p>一个server块可以有多个location块</p>
-<p>这块主要是基于Nginx服务器接收到的请求字符串（如 server_name/uri-string）,对虚拟主机名称（或IP别名）之外的字符串进行匹配，对特定的请求进行处理。地址定向，数据缓存和应答控制等功能，还有许多第三方模块的配置也在这儿进行</p>
-<h2 id="配置实例"><a href="#配置实例" class="headerlink" title="配置实例"></a>配置实例</h2><h3 id="反向代理"><a href="#反向代理" class="headerlink" title="反向代理"></a>反向代理</h3><h4 id="效果："><a href="#效果：" class="headerlink" title="效果："></a>效果：</h4><p>浏览器输入一个地址后跳转到tomcat主页面</p>
-<h4 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h4><ol>
-<li>启动tomcat，开发8080端口</li>
-<li>在nginx中进行请求配置<code>/usr/local/nginx/conf</code></li>
-</ol>
-<p><img src="https://files.catbox.moe/pppv6a.png"></p>
-<p><img src="https://files.catbox.moe/7xyxl8.png"></p>
-<p><img src="https://files.catbox.moe/ipsvek.png"></p>
-<h3 id="反向代理2"><a href="#反向代理2" class="headerlink" title="反向代理2"></a>反向代理2</h3><h4 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h4><blockquote>
-<p>使用Nginx反向代理，根据访问的路径跳转到不同端口的服务中</p>
-<p>Nginx监听端口为9001</p>
-<p>访问 <a target="_blank" rel="noopener" href="http://127.0.0.1:9001/edu/,%E8%B7%B3%E8%BD%AC%E5%88%B0127.0.0.1:8080">http://127.0.0.1:9001/edu/,跳转到127.0.0.1:8080</a></p>
-<p>访问<a target="_blank" rel="noopener" href="http://127.0.0.1:9001/vod/,%E8%B7%B3%E8%BD%AC%E5%88%B0127.0.0.1:8081">http://127.0.0.1:9001/vod/,跳转到127.0.0.1:8081</a></p>
-</blockquote>
-<h4 id="流程-1"><a href="#流程-1" class="headerlink" title="流程"></a>流程</h4><p>tomcat*2</p>
-<p>修改tomcat端口,server.xml中</p>
-<p>修改nginx配置文件</p>
-<p><img src="https://files.catbox.moe/mimy92.png"></p>
-<p>重启nginx</p>
-<p><img src="https://files.catbox.moe/7xzeiv.png"><img src="https://files.catbox.moe/dtlglg.png"></p>
-<h3 id="负载均衡"><a href="#负载均衡" class="headerlink" title="负载均衡"></a>负载均衡</h3><h4 id="效果-1"><a href="#效果-1" class="headerlink" title="效果"></a>效果</h4><blockquote>
-<p>浏览器输入地址<a href="http://ip:edu/a/html,应用负载均衡，使平均到8080和8081端口中">http://ip:edu/a/html,应用负载均衡，使平均到8080和8081端口中</a></p>
-</blockquote>
-<h4 id="流程-2"><a href="#流程-2" class="headerlink" title="流程"></a>流程</h4><p>tomcat*2</p>
-<p>在两台tomcat的webapps中，创建文件夹edu，其中创建a.html</p>
-<p>修改Nginx配置文件</p>
-<p><img src="https://files.catbox.moe/xlegz8.png"></p>
-<p><img src="https://files.catbox.moe/th2w8d.png"></p>
-<p><img src="https://files.catbox.moe/n7f7uc.png"></p>
-<p>刷新</p>
-<p><img src="https://files.catbox.moe/6sb8tt.png"></p>
-<h4 id="分配策略"><a href="#分配策略" class="headerlink" title="分配策略"></a>分配策略</h4><ul>
-<li>默认为轮询</li>
-<li>权重轮询：默认值为1，权重越高，分配越多<ul>
-<li><code>upstream</code>中<code>&#123;server ip:8080 weight-5; server ip:8081 weight=10&#125;</code></li>
-</ul>
-</li>
-<li>ip hash<ul>
-<li><code>upstream </code>中加一个句ip_hash<code>&#123;ip_hash&#125;</code></li>
-</ul>
-</li>
-<li>fair（第三方）：按照后端服务器的响应时间来分配请求，响应时间段的优先分配<ul>
-<li><code>upstream</code>中末尾加一句<code>fair</code>：<code>&#123;.... ; fair&#125;</code></li>
-</ul>
-</li>
-</ul>
-<h3 id="动静分离-1"><a href="#动静分离-1" class="headerlink" title="动静分离"></a>动静分离</h3><blockquote>
-<p>通过location指定不同的后缀名来实现不同的请求转发，通过expires参数设置，可以设置浏览器换成过期时间，减少与服务器之间的请求与流量。</p>
-<p>在过期之前，若服务器资源没有发送更新，则网页通过浏览器缓存的资源来加载（对比服务器对该文件的最后更新时间，若没有发生变化则返回304状态码，若有修改则之间从服务器下载，返回200状态码）</p>
-</blockquote>
-<h4 id="流程-3"><a href="#流程-3" class="headerlink" title="流程"></a>流程</h4><ul>
-<li>准备静态资源<ul>
-<li><img src="https://files.catbox.moe/ew6htd.png"></li>
-</ul>
-</li>
-<li>Nginx配置文件<ul>
-<li><img src="https://files.catbox.moe/p3dolq.png"></li>
-</ul>
-</li>
-</ul>
-<p><img src="https://files.catbox.moe/xosdvf.png"></p>
-<p><img src="https://files.catbox.moe/m6p6vy.png"></p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/11/17/nginx/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -428,27 +323,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h1><h2 id="Docker-学习过程"><a href="#Docker-学习过程" class="headerlink" title="Docker 学习过程"></a>Docker 学习过程</h2><ul>
-<li>Docker概述</li>
-<li>Docker安装</li>
-<li>Docker命令<ul>
-<li>镜像命令</li>
-<li>容器命令</li>
-<li>操作命令</li>
-</ul>
-</li>
-<li>Docker镜像</li>
-<li>容器数据卷</li>
-<li>DockerFile</li>
-<li>Docker网络原理</li>
-<li>IDEA整合Docker</li>
-</ul>
-<p>以上完成“单机Docker”</p>
-<ul>
-<li>Docker Compose 集群</li>
-<li>Docker Swarm 集群管理</li>
-<li>CI \CD Jenkins 持续集成和持续部署</li>
-</ul>
+          <h1 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h1><p>Docker 是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一个可移植的镜像中，然后发布到任何流行的 Linux或Windows操作系统的机器上，也可以实现虚拟化。容器是完全使用沙箱机制，相互之间不会有任何接口。</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2021/11/10/Docker/Docker/#more" rel="contents">
@@ -662,15 +537,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="Dubbo"><a href="#Dubbo" class="headerlink" title="Dubbo"></a>Dubbo</h1><h2 id="设计架构"><a href="#设计架构" class="headerlink" title="设计架构"></a>设计架构</h2><p><img src="https://files.catbox.moe/mnthc8.png" alt="设计架构"></p>
-<p>基本流程：</p>
-<ol>
-<li>Container 启动服务</li>
-<li>Provider将服务注册到注册中心zk中去</li>
-<li>Consumer向注册中心订阅服务</li>
-<li>Registry向消费者返回响应服务的Provider</li>
-<li>Consumer向服务提供者调用服务，二者间建立联系，自此可以不再需要Zk</li>
-<li>Monitor实时监控连接情况、点击次数（没有Monitor也不影响运行）
+          <h1 id="Dubbo"><a href="#Dubbo" class="headerlink" title="Dubbo"></a>Dubbo</h1><p>Dubbo(读音[ˈdʌbəʊ])是阿里巴巴公司开源的一个高性能优秀的服务框架，使得应用可通过高性能的 RPC 实现服务的输出和输入功能，可以和 [1]  Spring框架无缝集成。<br>Dubbo是一款高性能、轻量级的开源Java RPC框架，它提供了三大核心能力：面向接口的远程方法调用，智能容错和负载均衡，以及服务自动注册和发现。</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2021/08/16/Dubbo/dubbo/#more" rel="contents">
@@ -812,8 +679,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="SpringSecurity"><a href="#SpringSecurity" class="headerlink" title="SpringSecurity"></a>SpringSecurity</h1><p><a href="/https://blog.csdn.net/qq_40298902/article/details/106433192">CSDN实例</a></p>
-<h2 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h2><p>SpringSecurity本质是一个过滤器链</p>
+          <h1 id="SpringSecurity"><a href="#SpringSecurity" class="headerlink" title="SpringSecurity"></a>SpringSecurity</h1><p>Spring 是非常流行和成功的 Java 应用开发框架，SpringSecurity 正是 Spring 家族中的成员。SpringSecurity 基于 Spring 框架，提供了一套 Web 应用安全性的完整解决方案。</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2021/07/30/SpringSecurity/SpringSecurity/#more" rel="contents">
@@ -884,9 +750,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h1><h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><h3 id="STRING"><a href="#STRING" class="headerlink" title="STRING"></a>STRING</h3><p>二进制安全，可以包含任何数据</p>
-<p>大小上下512M</p>
-<h3 id="LIST"><a href="#LIST" class="headerlink" title="LIST"></a>LIST</h3>
+          <h1 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h1><p>Redis（Remote Dictionary Server )，即远程字典服务，是一个开源的使用ANSI C语言编写、支持网络、可基于内存亦可持久化的日志型、Key-Value数据库，并提供多种语言的API。从2010年3月15日起，Redis的开发工作由VMware主持。从2013年5月开始，Redis的开发由Pivotal赞助</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2021/07/16/Redis/redis/#more" rel="contents">

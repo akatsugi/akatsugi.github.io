@@ -20,12 +20,12 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"akatsugi.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.8.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
-<meta name="description" content="Dubbo设计架构 基本流程：  Container 启动服务 Provider将服务注册到注册中心zk中去 Consumer向注册中心订阅服务 Registry向消费者返回响应服务的Provider Consumer向服务提供者调用服务，二者间建立联系，自此可以不再需要Zk Monitor实时监控连接情况、点击次数（没有Monitor也不影响运行）">
+<meta name="description" content="DubboDubbo(读音[ˈdʌbəʊ])是阿里巴巴公司开源的一个高性能优秀的服务框架，使得应用可通过高性能的 RPC 实现服务的输出和输入功能，可以和 [1]  Spring框架无缝集成。Dubbo是一款高性能、轻量级的开源Java RPC框架，它提供了三大核心能力：面向接口的远程方法调用，智能容错和负载均衡，以及服务自动注册和发现。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Dubbo">
 <meta property="og:url" content="https://akatsugi.github.io/2021/08/16/Dubbo/dubbo/index.html">
 <meta property="og:site_name" content="akatsugi">
-<meta property="og:description" content="Dubbo设计架构 基本流程：  Container 启动服务 Provider将服务注册到注册中心zk中去 Consumer向注册中心订阅服务 Registry向消费者返回响应服务的Provider Consumer向服务提供者调用服务，二者间建立联系，自此可以不再需要Zk Monitor实时监控连接情况、点击次数（没有Monitor也不影响运行）">
+<meta property="og:description" content="DubboDubbo(读音[ˈdʌbəʊ])是阿里巴巴公司开源的一个高性能优秀的服务框架，使得应用可通过高性能的 RPC 实现服务的输出和输入功能，可以和 [1]  Spring框架无缝集成。Dubbo是一款高性能、轻量级的开源Java RPC框架，它提供了三大核心能力：面向接口的远程方法调用，智能容错和负载均衡，以及服务自动注册和发现。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://files.catbox.moe/mnthc8.png">
 <meta property="og:image" content="https://files.catbox.moe/j3j4ga.png">
@@ -266,7 +266,10 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h1 id="Dubbo"><a href="#Dubbo" class="headerlink" title="Dubbo"></a>Dubbo</h1><h2 id="设计架构"><a href="#设计架构" class="headerlink" title="设计架构"></a>设计架构</h2><p><img src="https://files.catbox.moe/mnthc8.png" alt="设计架构"></p>
+        <h1 id="Dubbo"><a href="#Dubbo" class="headerlink" title="Dubbo"></a>Dubbo</h1><p>Dubbo(读音[ˈdʌbəʊ])是阿里巴巴公司开源的一个高性能优秀的服务框架，使得应用可通过高性能的 RPC 实现服务的输出和输入功能，可以和 [1]  Spring框架无缝集成。<br>Dubbo是一款高性能、轻量级的开源Java RPC框架，它提供了三大核心能力：面向接口的远程方法调用，智能容错和负载均衡，以及服务自动注册和发现。</p>
+<span id="more"></span>
+
+<h2 id="设计架构"><a href="#设计架构" class="headerlink" title="设计架构"></a>设计架构</h2><p><img src="https://files.catbox.moe/mnthc8.png" alt="设计架构"></p>
 <p>基本流程：</p>
 <ol>
 <li>Container 启动服务</li>
@@ -274,7 +277,7 @@
 <li>Consumer向注册中心订阅服务</li>
 <li>Registry向消费者返回响应服务的Provider</li>
 <li>Consumer向服务提供者调用服务，二者间建立联系，自此可以不再需要Zk</li>
-<li>Monitor实时监控连接情况、点击次数（没有Monitor也不影响运行）<span id="more"></span>
+<li>Monitor实时监控连接情况、点击次数（没有Monitor也不影响运行）<!--more-->
 <h2 id="注册中心"><a href="#注册中心" class="headerlink" title="注册中心"></a>注册中心</h2></li>
 </ol>
 <p>Zookeeper</p>
